@@ -19,39 +19,6 @@ public class ApplicationInitializationComp {
 		
 		if(parameterService.findByParamid("dbparamstd") == null){
 			
-			Parameter parameter2 = new Parameter();	
-			parameter2.setParatype("ctrlclass");
-			parameter2.setParamid("ctrlclass00");
-			parameter2.setName("--- Unspecified");
-			parameter2.setDescription("Empty value");
-			parameter2.setKind("Combo value");
-			parameter2.setVisible(true);
-			parameter2.setEnabled(true);
-			parameter2.setLanguage("EN");
-			parameterService.save(parameter2);
-			
-			Parameter parameter3 = new Parameter();		
-			parameter3.setParamid("ctrlclass01");
-			parameter3.setParatype("ctrlclass");
-			parameter3.setName("Predictive");
-			parameter3.setDescription("");
-			parameter3.setKind("Combo value");
-			parameter3.setVisible(true);
-			parameter3.setEnabled(true);
-			parameter3.setLanguage("EN");
-			parameterService.save(parameter3);
-			
-			Parameter parameter4 = new Parameter();	
-			parameter4.setParatype("ctrlclass");
-			parameter4.setParamid("ctrlclass02");
-			parameter4.setName("Preventive");
-			parameter4.setDescription("");
-			parameter4.setKind("Combo value");
-			parameter4.setVisible(true);
-			parameter4.setEnabled(true);
-			parameter4.setLanguage("EN");
-			parameterService.save(parameter4);
-			
 			Parameter parameter5 = new Parameter();	
 			parameter5.setParatype("ctrlfreq");
 			parameter5.setParamid("ctrlfreq00");
@@ -194,9 +161,6 @@ public class ApplicationInitializationComp {
 			parameter17.setEnabled(true);
 			parameter17.setLanguage("EN");
 			parameterService.save(parameter17);
-			
-
-			
 			
 			Parameter parameter18 = new Parameter();	
 			parameter18.setParatype("stdfreq");
@@ -528,6 +492,49 @@ public class ApplicationInitializationComp {
 			parameter47.setLanguage("EN");
 			parameterService.save(parameter47);			
 			
+			Parameter parameter48 = new Parameter();	
+			parameter48.setParatype("ctrlclass");
+			parameter48.setParamid("ctrlclass00");
+			parameter48.setName("--- Unspecified");
+			parameter48.setDescription("Empty value");
+			parameter48.setKind("Combo value");
+			parameter48.setVisible(true);
+			parameter48.setEnabled(true);
+			parameter48.setLanguage("EN");
+			parameterService.save(parameter48);
+			
+			Parameter parameter49 = new Parameter();		
+			parameter49.setParamid("ctrlclass01");
+			parameter49.setParatype("ctrlclass");
+			parameter49.setName("Predictive");
+			parameter49.setDescription("");
+			parameter49.setKind("Combo value");
+			parameter49.setVisible(true);
+			parameter49.setEnabled(true);
+			parameter49.setLanguage("EN");
+			parameterService.save(parameter49);
+			
+			Parameter parameter50 = new Parameter();	
+			parameter50.setParatype("ctrlclass");
+			parameter50.setParamid("ctrlclass02");
+			parameter50.setName("Preventive");
+			parameter50.setDescription("");
+			parameter50.setKind("Combo value");
+			parameter50.setVisible(true);
+			parameter50.setEnabled(true);
+			parameter50.setLanguage("EN");
+			parameterService.save(parameter50);
+			
+			Parameter parameter51 = new Parameter();	
+			parameter51.setParatype("ctrlclass");
+			parameter51.setParamid("ctrlclass02");
+			parameter51.setName("Corrective");
+			parameter51.setDescription("");
+			parameter51.setKind("Combo value");
+			parameter51.setVisible(true);
+			parameter51.setEnabled(true);
+			parameter51.setLanguage("EN");
+			parameterService.save(parameter51);
 			
 			
 			//Não edite este bloco!

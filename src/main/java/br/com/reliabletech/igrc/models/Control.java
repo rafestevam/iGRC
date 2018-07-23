@@ -175,8 +175,8 @@ public class Control {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String pname) {
+		name = pname;
 	}
 
 	public String getDescription() {
@@ -226,6 +226,5 @@ public class Control {
 	public void setDocuments(String documents) {
 		this.documents = documents;
 	}
-	
 	
 }

@@ -1,10 +1,13 @@
 package br.com.reliabletech.igrc.models;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,8 +18,175 @@ public class Test {
 	@NotNull
 	private String name;
 	
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date plannedStartDate;
+
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date plannedEndDate;
+
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private java.util.Date actualStartDate;
+	
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	private java.util.Date actualEndDate;
+	
+	private Boolean testDesign;
+	
+	private Boolean testEffect;
+	
 	@Lob
-	private String description;
+	private String walkthrough;
+
+	@Lob
+	private String testActivity;
+	
+	private Boolean techObs;
+	
+	private Boolean techIndag;
+	
+	private Boolean techRetest;
+	
+	private Boolean techInsp;
+	
+	private Boolean techConf;
+	
+	@Lob
+	private String methodSample;
+	
+	@Lob
+	private String conclusionTester;
+	
+	@Lob
+	private String conclusionReviewer;
+	
+	private String status;
+	
+	private String source;
+	
+	private String process;
+	
+	private String risk;
+	
+	private String control;
+	
+	private String testPlan;
+	
+	private String testerGroup;
+	
+	private String responsible;
+	
+	private String reviewerGroup; 
+	
+	private String documents;
+
+	
+	public String getMethodSample() {
+		return methodSample;
+	}
+
+	public void setMethodSample(String methodSample) {
+		this.methodSample = methodSample;
+	}
+
+	public String getConclusionTester() {
+		return conclusionTester;
+	}
+
+	public void setConclusionTester(String conclusionTester) {
+		this.conclusionTester = conclusionTester;
+	}
+
+	public String getConclusionReviewer() {
+		return conclusionReviewer;
+	}
+
+	public void setConclusionReviewer(String conclusionReviewer) {
+		this.conclusionReviewer = conclusionReviewer;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getProcess() {
+		return process;
+	}
+
+	public void setProcess(String process) {
+		this.process = process;
+	}
+
+	public String getRisk() {
+		return risk;
+	}
+
+	public void setRisk(String risk) {
+		this.risk = risk;
+	}
+
+	public String getControl() {
+		return control;
+	}
+
+	public void setControl(String control) {
+		this.control = control;
+	}
+
+	public String getTestPlan() {
+		return testPlan;
+	}
+
+	public void setTestPlan(String testPlan) {
+		this.testPlan = testPlan;
+	}
+
+	public String getTesterGroup() {
+		return testerGroup;
+	}
+
+	public void setTesterGroup(String testerGroup) {
+		this.testerGroup = testerGroup;
+	}
+
+	public String getResponsible() {
+		return responsible;
+	}
+
+	public void setResponsible(String responsible) {
+		this.responsible = responsible;
+	}
+
+	public String getReviewerGroup() {
+		return reviewerGroup;
+	}
+
+	public void setReviewerGroup(String reviewerGroup) {
+		this.reviewerGroup = reviewerGroup;
+	}
+
+	public String getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(String documents) {
+		this.documents = documents;
+	}
 
 	public Long getId() {
 		return id;
@@ -34,11 +204,110 @@ public class Test {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public Boolean getTechObs() {
+		return techObs;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTechObs(Boolean techObs) {
+		this.techObs = techObs;
 	}
+
+	public Boolean getTechIndag() {
+		return techIndag;
+	}
+
+	public void setTechIndag(Boolean techIndag) {
+		this.techIndag = techIndag;
+	}
+
+	public Boolean getTechRetest() {
+		return techRetest;
+	}
+
+	public void setTechRetest(Boolean techRetest) {
+		this.techRetest = techRetest;
+	}
+
+	public Boolean getTechInsp() {
+		return techInsp;
+	}
+
+	public void setTechInsp(Boolean techInsp) {
+		this.techInsp = techInsp;
+	}
+
+	public Boolean getTechConf() {
+		return techConf;
+	}
+
+	public void setTechConf(Boolean techConf) {
+		this.techConf = techConf;
+	}
+
+	public Boolean getTestDesign() {
+		return testDesign;
+	}
+
+	public void setTestDesign(Boolean testDesign) {
+		this.testDesign = testDesign;
+	}
+
+	public Boolean getTestEffect() {
+		return testEffect;
+	}
+
+	public void setTestEffect(Boolean testEffect) {
+		this.testEffect = testEffect;
+	}
+
+	public java.util.Date getPlannedStartDate() {
+		return plannedStartDate;
+	}
+
+	public void setPlannedStartDate(java.util.Date plannedStartDate) {
+		this.plannedStartDate = plannedStartDate;
+	}
+
+	public java.util.Date getPlannedEndDate() {
+		return plannedEndDate;
+	}
+
+	public void setPlannedEndDate(java.util.Date plannedEndDate) {
+		this.plannedEndDate = plannedEndDate;
+	}
+
+	public java.util.Date getActualStartDate() {
+		return actualStartDate;
+	}
+
+	public void setActualStartDate(java.util.Date actualStartDate) {
+		this.actualStartDate = actualStartDate;
+	}
+
+	public java.util.Date getActualEndDate() {
+		return actualEndDate;
+	}
+
+	public void setActualEndDate(java.util.Date actualEndDate) {
+		this.actualEndDate = actualEndDate;
+	}
+
+	public String getWalkthrough() {
+		return walkthrough;
+	}
+
+	public void setWalkthrough(String walkthrough) {
+		this.walkthrough = walkthrough;
+	}
+
+	public String getTestActivity() {
+		return testActivity;
+	}
+
+	public void setTestActivity(String testActivity) {
+		this.testActivity = testActivity;
+	}
+
+	
+	
 }
