@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:include="fragments/iGRC.html :: headerfiles"></th:block>
+<title>iGRC :: Risks</title>
+</head>
+<body class="fixed-nav sticky-footer bg-dark">
+
+	<nav th:replace="fragments/iGRC.html :: mainNav"></nav>
+	
+	
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">Risk</li>
+				<li class="breadcrumb-item active">Risk List</li>
+			</ol>
+						
+				<div class="card mb-3">
+					<div class="card-header">List</div>
+					<div class="card-body">
+						
+						<div class="table-responsive">
+							<div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+								<div class="col-sm-12">
+								<table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Risk ID: activate to sort column descending" style="width: 85px;">Risk ID</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 137px;">Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                	<th rowspan="1" colspan="1">Risk ID</th>
+                	<th rowspan="1" colspan="1">Risk Name</th>
+                	<th rowspan="1" colspan="1">Update</th>
+                	<th rowspan="1" colspan="1">Delete</th>
+                </tr>
+              </tfoot>
+              <tbody>
+              <tr role="row" class="odd" th:each="risk : ${risks}">
+                  <td class="sorting_1" th:text="${risk.riskid}"></td>
+                  <td th:text="${risk.name}"></td>
+                  <td><a th:href="@{/risk/update(guid=${risk.guid})}">Update</a>
+                  <td><a th:href="@{/risk/delete(guid=${risk.guid})}">Delete</a>
+              </tr>
+              </tbody>
+            </table>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="card-footer">
+					</div>
+				
+				</div>
+					
+		</div>
+	</div>
+	
+	<div th:replace="fragments/iGRC.html :: logoutModal"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+<script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/js/sb-admin.min.js}"></script>
+<script th:src="@{/js/sb-admin-datatables.min.js}"></script>
+<script th:src="@{/js/sb-admin-charts.min.js}"></script>
+
+</body>
+</html>

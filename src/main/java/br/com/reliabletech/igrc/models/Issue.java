@@ -74,8 +74,6 @@ public class Issue {
 	
 	private Boolean replanned;
 	
-
-	
 	private String issueSource;
 	
 	@Basic

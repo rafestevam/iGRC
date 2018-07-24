@@ -70,7 +70,9 @@ public class Risk {
 	private Boolean asserDisclosure; 
 	private Boolean asserNA; 
 	
-	private String documents;	
+	private String documents;
+	
+	private String guid;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_risk_controls", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="control_id"))
@@ -84,8 +86,6 @@ public class Risk {
 	@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_id"))
 	private List<RiskAssessment> riskassessments = new ArrayList<RiskAssessment>();
 	
-
-
 	public List<RiskAssessment> getRiskassessments() {
 		return riskassessments;
 	}
@@ -275,6 +275,12 @@ public class Risk {
 	}
 	public void setResQLPropability(String resQLPropability) {
 		this.resQLProbability = resQLPropability;
+	}
+	public String getGuid() {
+		return guid;
+	}
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 	
 	
