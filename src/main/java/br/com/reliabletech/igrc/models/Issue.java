@@ -37,6 +37,10 @@ public class Issue {
 	
 	private String issueCreator;
 	
+	private String issueOwner;
+	
+	private String issueReviewer;
+	
 	private String riskAssigned;
 	
 	private String riskPotAssess;
@@ -70,7 +74,7 @@ public class Issue {
 	
 	private Boolean replanned;
 	
-	private String issueOwner;
+
 	
 	private String issueSource;
 	
@@ -347,8 +351,15 @@ public class Issue {
 	public void setDocuments(String documents) {
 		this.documents = documents;
 	}
+
+	public String getIssueReviewer() {
+		return issueReviewer;
+	}
+
+	public void setIssueReviewer(String issueReviewer) {
+		this.issueReviewer = issueReviewer;
+	}
 	
-	
-	
+
 	
 }

@@ -19,6 +19,9 @@ public class ActionPlan {
 	private Long id;
 
 	@NotNull
+	private String apID;
+	
+	@NotNull
 	private String name;
 	
 	@Lob
@@ -29,6 +32,10 @@ public class ActionPlan {
 	private java.util.Date creationDate;
 	
 	private String apCreator;
+	
+	private String apOwner;
+	
+	private String apReviewer;
 	
 	private String issueAssigned;
 	
@@ -197,6 +204,30 @@ public class ActionPlan {
 
 	public void setDocuments(String documents) {
 		this.documents = documents;
+	}
+
+	public String getApOwner() {
+		return apOwner;
+	}
+
+	public void setApOwner(String apOwner) {
+		this.apOwner = apOwner;
+	}
+
+	public String getApReviewer() {
+		return apReviewer;
+	}
+
+	public void setApReviewer(String apReviewer) {
+		this.apReviewer = apReviewer;
+	}
+
+	public String getApID() {
+		return apID;
+	}
+
+	public void setApID(String apID) {
+		this.apID = apID;
 	}
 
 	
