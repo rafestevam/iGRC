@@ -8,7 +8,7 @@ import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class ControlEvaluationPlan {
+public class ControlAssessmentPlan {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
