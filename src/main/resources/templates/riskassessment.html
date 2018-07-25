@@ -32,28 +32,28 @@
 							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
 						</div>
 						<div class="form-group">
-						  <label for="qlPotDamage">Qualitative Potential Damage / Impact</label>
+						  <label for="qlPotDamage">Potential Qualitative Damage / Impact</label>
 						  <select class="form-control" th:field="*{qlPotDamage}">
 						    <option th:each="qldamage : ${qldamages}" value="${qldamage.paramid}" th:utext="${qldamage.name}">
 						  </select>
 						</div>
 						<div class="form-group">
-						  <label for="qtPotDamage">Quantitative Potential Damage / Impact</label>
+						  <label for="qtPotDamage">Potential Quantitative Damage / Impact</label>
 						  <input type="number" min="0.00" max="1000000.00" step="0.01" th:field="*{qtPotDamage}" class="form-control">
 						</div>
 						<div class="form-group">
-						  <label for="qlProbability">Qualitative Probability</label>
-						  <select class="form-control" th:field="*{qlProbability}">
+						  <label for="qlPotProbability">Potential Qualitative Probability</label>
+						  <select class="form-control" th:field="*{qlPotProbability}">
 						    <option th:each="probab : ${probabs}" value="${probab.paramid}" th:utext="${probab.name}">
 						  </select>
 						</div>
 						<div class="form-group">
-						  <label for="qtOccFreq">Quantitative Probability</label>
-						  <input type="number" min="0" max="100" step="1" th:field="*{qtOccFreq}" class="form-control">
+						  <label for="qtPotOccFreq">Potential Quantitative Probability</label>
+						  <input type="number" min="0" max="100" step="1" th:field="*{qtPotOccFreq}" class="form-control">
 						</div>
 						<div class="form-group">
-						  <label for="trend">Trend</label>
-						  <select class="form-control" th:field="*{trend}">
+						  <label for="potTrend">Potential Trend</label>
+						  <select class="form-control" th:field="*{potTrend}">
 						    <option th:each="trendopt : ${trendopts}" value="${trendopt.paramid}" th:utext="${trendopt.name}">
 						  </select>
 						</div>

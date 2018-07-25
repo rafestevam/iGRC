@@ -26,11 +26,11 @@ public class RiskAssessment {
 
 	private String qlPotDamage;
 	
-	private Integer qtOccFreq;
+	private Integer qtPotOccFreq;
 	
-	private String qlProbability;
+	private String qlPotProbability;
 	
-	private String trend;
+	private String potTrend;
 	
 	@Lob
 	private String obsOwner;
@@ -90,30 +90,6 @@ public class RiskAssessment {
 		this.qlPotDamage = qlPotDamage;
 	}
 
-	public Integer getQtOccFreq() {
-		return qtOccFreq;
-	}
-
-	public void setQtOccFreq(Integer qtOccFreq) {
-		this.qtOccFreq = qtOccFreq;
-	}
-
-	public String getQlOccFreq() {
-		return getQlProbability();
-	}
-
-	public void setQlOccFreq(String qlOccFreq) {
-		this.setQlProbability(qlOccFreq);
-	}
-
-	public String getTrend() {
-		return trend;
-	}
-
-	public void setTrend(String trend) {
-		this.trend = trend;
-	}
-
 	public String getDocuments() {
 		return documents;
 	}
@@ -130,13 +106,28 @@ public class RiskAssessment {
 		this.obsOwner = obsOwner;
 	}
 
-	public String getQlProbability() {
-		return qlProbability;
+	public Integer getQtPotOccFreq() {
+		return qtPotOccFreq;
 	}
 
-	public void setQlProbability(String qlProbability) {
-		this.qlProbability = qlProbability;
+	public void setQtPotOccFreq(Integer qtPotOccFreq) {
+		this.qtPotOccFreq = qtPotOccFreq;
 	}
 
+	public String getQlPotProbability() {
+		return qlPotProbability;
+	}
+
+	public void setQlPotProbability(String qlPotProbability) {
+		this.qlPotProbability = qlPotProbability;
+	}
+
+	public String getPotTrend() {
+		return potTrend;
+	}
+
+	public void setPotTrend(String potTrend) {
+		this.potTrend = potTrend;
+	}
 
 }
