@@ -1,9 +1,8 @@
 package br.com.reliabletech.igrc.models;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
@@ -12,8 +11,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Test {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	
+	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="guid", length=100)
+	private String guid;
 
 	@NotNull
 	private String name;
@@ -188,14 +189,6 @@ public class Test {
 		this.documents = documents;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -306,6 +299,14 @@ public class Test {
 
 	public void setTestActivity(String testActivity) {
 		this.testActivity = testActivity;
+	}
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 
 	

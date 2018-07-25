@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,8 +19,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Risk {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="guid", length=100)
+	private String guid;
 
 	@NotNull
 	private String name;
@@ -73,18 +73,16 @@ public class Risk {
 	
 	private String documents;
 	
-	private String guid;
-	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_risk_controls", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="control_id"))
+	@JoinTable(name="jt_risk_controls", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_risk_issue", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="issue_id"))
+	@JoinTable(name="jt_risk_issue", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_id"))
+	@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_guid"))
 	private List<RiskAssessment> riskassessments = new ArrayList<RiskAssessment>();
 	
 	@ManyToMany(mappedBy="risks")
@@ -131,12 +129,6 @@ public class Risk {
 		this.issues = issues;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}

@@ -1,110 +1,107 @@
 package br.com.reliabletech.igrc.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Parameter {
-	
-@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-private Long id;
 
-@NotNull
-private String paramid;
+	@Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="guid", length=100)
+	private String guid;
 
-@NotNull
-private String name;
+	@NotNull
+	private String paramid;
 
-private String description;
+	@NotNull
+	private String name;
 
-@NotNull
-private String paratype;
+	private String description;
 
-@NotNull
-private String kind;
+	@NotNull
+	private String paratype;
 
-private Boolean visible=true;
+	@NotNull
+	private String kind;
 
-private Boolean enabled=true;
+	private Boolean visible = true;
 
-private String language="EN";
+	private Boolean enabled = true;
 
+	private String language = "EN";
 
+	public String getKind() {
+		return kind;
+	}
 
-public String getKind() {
-	return kind;
-}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 
-public void setKind(String kind) {
-	this.kind = kind;
-}
+	public Boolean getVisible() {
+		return visible;
+	}
 
-public Boolean getVisible() {
-	return visible;
-}
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
 
-public void setVisible(Boolean visible) {
-	this.visible = visible;
-}
+	public Boolean getEnabled() {
+		return enabled;
+	}
 
-public Boolean getEnabled() {
-	return enabled;
-}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
-public void setEnabled(Boolean enabled) {
-	this.enabled = enabled;
-}
+	public String getLanguage() {
+		return language;
+	}
 
-public String getLanguage() {
-	return language;
-}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
-public void setLanguage(String language) {
-	this.language = language;
-}
+	public String getParatype() {
+		return paratype;
+	}
 
-public String getParatype() {
-	return paratype;
-}
+	public void setParatype(String paratype) {
+		this.paratype = paratype;
+	}
 
-public void setParatype(String paratype) {
-	this.paratype = paratype;
-}
+	public String getParamid() {
+		return paramid;
+	}
 
-public Long getId() {
-	return id;
-}
+	public void setParamid(String paramid) {
+		this.paramid = paramid;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public String getDescription() {
+		return description;
+	}
 
-public String getParamid() {
-	return paramid;
-}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-public void setParamid(String paramid) {
-	this.paramid = paramid;
-}
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-public String getDescription() {
-	return description;
-}
+	public String getGuid() {
+		return guid;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
-
-public String getName() {
-	return name;
-}
-
-public void setName(String name) {
-	this.name = name;
-}
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
 
 }

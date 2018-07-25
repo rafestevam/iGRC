@@ -5,9 +5,8 @@ import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,8 +18,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Regulation {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	
+	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="guid", length=100)
+	private String guid;
 
 	@NotNull
 	private String regID;
@@ -48,20 +49,12 @@ public class Regulation {
 	private String documents;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_reg_risk", joinColumns=@JoinColumn(name="regulation_id"), inverseJoinColumns=@JoinColumn(name="risk_id"))
+	@JoinTable(name="jt_reg_risk", joinColumns=@JoinColumn(name="regulation_guid"), inverseJoinColumns=@JoinColumn(name="risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_reg_control", joinColumns=@JoinColumn(name="regulation_id"), inverseJoinColumns=@JoinColumn(name="control_id"))
+	@JoinTable(name="jt_reg_control", joinColumns=@JoinColumn(name="regulation_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -165,6 +158,14 @@ public class Regulation {
 
 	public void setControls(List<Control> controls) {
 		this.controls = controls;
+	}
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 
 }

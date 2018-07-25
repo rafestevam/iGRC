@@ -1,5 +1,7 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ public class IssueServiceImpl implements IssueService {
 	private IssueRepository issueRepository;
 	
 	public void save(Issue issue) {
+		String guid = "";
+		if(issue.getGuid() == null){
+			guid = UUID.randomUUID().toString();
+			issue.setGuid(guid);
+		}
 		issueRepository.save(issue);
 	}
 

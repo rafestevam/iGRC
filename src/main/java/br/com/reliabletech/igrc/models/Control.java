@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,8 +17,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Control {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="guid", length=100)
+	private String guid;
 	
 	@NotNull
 	private String controlid;
@@ -53,15 +53,15 @@ public class Control {
 	private String documents;
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_id"), inverseJoinColumns=@JoinColumn(name="issue_id"))
+	@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_control_assess", joinColumns=@JoinColumn(name="control_id"), inverseJoinColumns=@JoinColumn(name="ControlAssessment_id"))
+	@JoinTable(name="jt_control_control_assess", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="ControlAssessment_guid"))
 	private List<ControlAssessment> controlassessment = new ArrayList<ControlAssessment>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_id"), inverseJoinColumns=@JoinColumn(name="Test_id"))
+	@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="Test_guid"))
 	private List<Test> tests = new ArrayList<Test>();
 
 	@ManyToMany(mappedBy="controls")
@@ -166,14 +166,6 @@ public class Control {
 		this.tests = tests;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -228,6 +220,14 @@ public class Control {
 
 	public void setDocuments(String documents) {
 		this.documents = documents;
+	}
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 	
 }

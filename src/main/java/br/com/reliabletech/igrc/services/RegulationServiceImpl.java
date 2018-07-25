@@ -1,5 +1,7 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ public class RegulationServiceImpl implements RegulationService {
 	private RegulationRepository regulationRepository;
 	
 	public void save(Regulation regulation) {
+		String guid = "";
+		if(regulation.getGuid() == null){
+			guid = UUID.randomUUID().toString();
+			regulation.setGuid(guid);
+		}
 		regulationRepository.save(regulation);
 	}
 

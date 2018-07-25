@@ -1,5 +1,7 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ public class ProcessServiceImpl implements ProcessService {
 	private ProcessRepository processRepository;
 
 	public void save(StruProcess process) {
+		String guid = "";
+		if(process.getGuid() == null){
+			guid = UUID.randomUUID().toString();
+			process.setGuid(guid);
+		}
 		processRepository.save(process);
 	}
 

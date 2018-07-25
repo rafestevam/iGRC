@@ -1,5 +1,7 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
 	private RiskAssessmentRepository riskassessmentRepository;
 	
 	public void save(RiskAssessment riskassessment) {
+		String guid = "";
+		if(riskassessment.getGuid() == null){
+			guid = UUID.randomUUID().toString();
+			riskassessment.setGuid(guid);
+		}
 		riskassessmentRepository.save(riskassessment);
 	}
 
