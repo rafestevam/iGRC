@@ -86,6 +86,9 @@ public class Risk {
 	@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_id"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_id"))
 	private List<RiskAssessment> riskassessments = new ArrayList<RiskAssessment>();
 	
+	@ManyToMany(mappedBy="risks")
+	private List<Regulation> regulations = new ArrayList<Regulation>();
+	
 	public List<RiskAssessment> getRiskassessments() {
 		return riskassessments;
 	}

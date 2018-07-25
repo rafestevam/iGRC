@@ -52,9 +52,6 @@ public class Control {
 	
 	private String documents;
 	
-	@ManyToMany(mappedBy="controls")
-	private List<Risk> risks = new ArrayList<Risk>();
-
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_id"), inverseJoinColumns=@JoinColumn(name="issue_id"))
 	private List<Issue> issues = new ArrayList<Issue>();
@@ -66,6 +63,12 @@ public class Control {
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_id"), inverseJoinColumns=@JoinColumn(name="Test_id"))
 	private List<Test> tests = new ArrayList<Test>();
+
+	@ManyToMany(mappedBy="controls")
+	private List<Risk> risks = new ArrayList<Risk>();
+	
+	@ManyToMany(mappedBy="controls")
+	private List<Regulation> regulations = new ArrayList<Regulation>();
 	
 	public String getControlid() {
 		return controlid;
