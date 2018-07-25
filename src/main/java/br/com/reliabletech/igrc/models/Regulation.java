@@ -23,6 +23,9 @@ public class Regulation {
 	private Long id;
 
 	@NotNull
+	private String regID;
+	
+	@NotNull
 	private String name;
 	
 	@Lob
@@ -32,7 +35,9 @@ public class Regulation {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date ruleOfRegulation;
 	
-	private String responsilbleArea;
+	private Boolean obsolete;
+	
+	private String responsibleArea;
 	
 	private String affectedProcess;
 	
@@ -44,11 +49,11 @@ public class Regulation {
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_reg_risk", joinColumns=@JoinColumn(name="regulation_id"), inverseJoinColumns=@JoinColumn(name="risk_id"))
-	private List<Risk> risk = new ArrayList<Risk>();
+	private List<Risk> risks = new ArrayList<Risk>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_reg_control", joinColumns=@JoinColumn(name="regulation_id"), inverseJoinColumns=@JoinColumn(name="control_id"))
-	private List<Control> control = new ArrayList<Control>();
+	private List<Control> controls = new ArrayList<Control>();
 
 	public Long getId() {
 		return id;
@@ -115,11 +120,51 @@ public class Regulation {
 	}
 
 	public String getResponsilbleArea() {
-		return responsilbleArea;
+		return responsibleArea;
 	}
 
-	public void setResponsilbleArea(String responsilbleArea) {
-		this.responsilbleArea = responsilbleArea;
+	public void setResponsilbleArea(String responsibleArea) {
+		this.responsibleArea = responsibleArea;
 	}
-	
+
+	public String getRegID() {
+		return regID;
+	}
+
+	public void setRegID(String regID) {
+		this.regID = regID;
+	}
+
+	public Boolean getObsolete() {
+		return obsolete;
+	}
+
+	public void setObsolete(Boolean obsolete) {
+		this.obsolete = obsolete;
+	}
+
+	public String getResponsibleArea() {
+		return responsibleArea;
+	}
+
+	public void setResponsibleArea(String responsibleArea) {
+		this.responsibleArea = responsibleArea;
+	}
+
+	public List<Risk> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(List<Risk> risks) {
+		this.risks = risks;
+	}
+
+	public List<Control> getControls() {
+		return controls;
+	}
+
+	public void setControls(List<Control> controls) {
+		this.controls = controls;
+	}
+
 }

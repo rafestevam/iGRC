@@ -29,7 +29,7 @@ public class RegulationController {
 		List<Parameter> stdFreqs = parameterService.findByParatype("stdfreq");
 		model.addAttribute("stdFreqs", stdFreqs);
 				
-		return "risk";
+		return "regulation";
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
