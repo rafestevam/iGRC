@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.reliabletech.igrc.models.Control;
 import br.com.reliabletech.igrc.models.Parameter;
 import br.com.reliabletech.igrc.models.Risk;
+import br.com.reliabletech.igrc.services.ControlService;
 import br.com.reliabletech.igrc.services.ParameterService;
 import br.com.reliabletech.igrc.services.RiskService;
 
@@ -22,15 +24,20 @@ public class RiskController {
 	private RiskService riskService;
 	
 	@Autowired
+	private ControlService controlService;
+	
+	@Autowired
 	private ParameterService parameterService;
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String riskForm(Risk risk, Model model){
 
+		List<Control> controls = controlService.findAll();
 		List<Parameter> stdFreqs = parameterService.findByParatype("stdfreq");
 		model.addAttribute("stdFreqs", stdFreqs);
 		model.addAttribute("update", false);
 		model.addAttribute("show", false);
+		model.addAttribute("controls", controls);
 				
 		return "risk";
 	}
@@ -102,6 +109,14 @@ public class RiskController {
 		
 	}
 	
+	
+	@RequestMapping(value="/attachControl", method=RequestMethod.POST)
+	public String attachControls(Risk risk, String[] controls) {
+		
+		
+		
+		return "risk";
+	}
 	
 	
 }
