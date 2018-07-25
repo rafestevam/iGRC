@@ -14,14 +14,14 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Risk</li>
-				<li class="breadcrumb-item active">Risk List</li>
+				<li class="breadcrumb-item active">Risk View</li>
 			</ol>
 
 			<div class="alert alert-success" th:if="${successMessage}"
 				th:text="${successMessage}"></div>
 
 			<div class="card mb-3">
-				<div class="card-header">List</div>
+				<div class="card-header">Risk List</div>
 				<div class="card-body">
 
 					<div class="table-responsive">
@@ -66,9 +66,8 @@
 												th:text="${risk.riskid}"></a></td>
 											<td th:text="${risk.name}"></td>
 											<td th:text="${risk.description}"></td>
-											<td><a th:href="@{/risk/update(guid=${risk.guid})}">Update</a>
-<!-- 											<td><a th:href="@{/risk/update}">Update</a> -->
-											<td><a th:href="@{/risk/delete(guid=${risk.guid})}">Delete</a>
+											<td align="center"><a th:href="@{/risk/update(guid=${risk.guid})}"><i class="fas fa-edit"></i></a></td>
+											<td align="center"><a th:href="@{/risk/delete(guid=${risk.guid})}"><i class="far fa-trash-alt"></i></a></td>
 										</tr>
 									</tbody>
 								</table>

@@ -6,4 +6,6 @@ import br.com.reliabletech.igrc.models.Control;
 
 public interface ControlRepository extends JpaRepository<Control, Long> {
 
+	public Control findByGuid(String guid);
+	
 }

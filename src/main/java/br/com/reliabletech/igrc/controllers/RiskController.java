@@ -53,8 +53,7 @@ public class RiskController {
 		riskService.save(risk);
 		model.addAttribute("successMessage", "Risk created sucessfully!");
 		
-		//return "risk";
-		return "redirect:list";
+		return "redirect:view";
 		
 	}
 	
@@ -64,18 +63,17 @@ public class RiskController {
 		riskService.save(risk);
 		model.addAttribute("successMessage", "Risk updated sucessfully!");
 		
-		//return "risk";
-		return "redirect:list";
+		return "redirect:view";
 		
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String riskList(Model model){
 		
 		List<Risk> risks = riskService.findAll();
 		model.addAttribute("risks", risks);
 		
-		return "risklist";
+		return "riskview";
 		
 	}
 	

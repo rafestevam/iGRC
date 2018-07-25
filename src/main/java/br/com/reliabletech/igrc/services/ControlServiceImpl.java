@@ -1,5 +1,6 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,18 @@ public class ControlServiceImpl implements ControlService {
 			control.setGuid(guid);
 		}
 		controlRepository.save(control);
+	}
+
+	public List<Control> findAll() {
+		return controlRepository.findAll();
+	}
+
+	public Control findByGuid(String guid) {
+		return controlRepository.findByGuid(guid);
+	}
+
+	public void delete(Control control) {
+		controlRepository.delete(control);
 	}
 
 }

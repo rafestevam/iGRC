@@ -14,82 +14,89 @@
 			
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Control</li>
-				<li class="breadcrumb-item active">New Control</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Control Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Control Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Control</li>				
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/control/create}" method="POST" th:object="${control}">
+			<form th:action="@{/control/save}" method="POST" th:object="${control}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
 							<label for="control_id">Control ID</label>
-							<input type="text" th:field="*{controlid}" class="form-control">
+							<input type="text" th:field="*{controlid}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${control.guid}">
 						</div>
 						<div class="form-group">
 							<label for="name">Control Name</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="name">Control Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="ctrlactivity">Control Activity</label>
-							<textarea cols="20" th:field="*{ctrlactivity}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{ctrlactivity}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label class="checkbox-inline">Key Control </label>
-							<input type="checkbox" value=false th:field="*{keyctrl}">
+							<input type="checkbox" value=false th:field="*{keyctrl}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="ctrlclass">Control Class</label>
-							  <select class="form-control" th:field="*{ctrlclass}">
+							  <select class="form-control" th:field="*{ctrlclass}"  th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 							    <option th:each="controlClass : ${controlClasses}" value="${controlClass.paramid}" th:utext="${controlClass.name}">
 							  </select>
 						</div>
 						<div class="form-group">
 						  <label for="ctrlfreq">Control Frequency</label>
-						  <select class="form-control" th:field="*{ctrlfreq}">
+						  <select class="form-control" th:field="*{ctrlfreq}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						    <option th:each="controlFreq : ${controlFreqs}" value="${controlFreq.paramid}" th:utext="${controlFreq.name}">
 						  </select>
 						</div>
 						<div class="form-group">
 						  <label for="ctrltype">Control Type</label>
-						  <select class="form-control" th:field="*{ctrltype}">
+						  <select class="form-control" th:field="*{ctrltype}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						    <option th:each="controlType : ${controlTypes}" th:value="${controlType.paramid}" th:utext="${controlType.name}" >
 						  </select>
 						</div>
 						<div class="form-group">
 							<label for="name">Control Manager</label>
-							<input type="text" th:field="*{ctrlmanager}" class="form-control">
+							<input type="text" th:field="*{ctrlmanager}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="fstcontrolline">1st Defense Line Status (Owner)</label>
-							<input type="text" th:field="*{fstcontrolline}" class="form-control">
+							<input type="text" th:field="*{fstcontrolline}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="sndcontrolline">2nd Defense Line Status (Internal Compliance)</label>
-							<input type="text" th:field="*{sndcontrolline}" class="form-control">
+							<input type="text" th:field="*{sndcontrolline}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="trdcontrolline">3rd Defense Line Status (Internal/External Audit)</label>
-							<input type="text" th:field="*{fstcontrolline}" class="form-control">
+							<input type="text" th:field="*{fstcontrolline}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="ctrlenvmt">Control Environment Status</label>
-							<input type="text" th:field="*{ctrlenvmt}" class="form-control">
+							<input type="text" th:field="*{ctrlenvmt}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 												
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
+					</div>
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Control View</a>
 					</div>
 				
 				</div>
