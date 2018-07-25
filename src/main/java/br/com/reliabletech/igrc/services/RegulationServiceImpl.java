@@ -1,5 +1,6 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,18 @@ public class RegulationServiceImpl implements RegulationService {
 			regulation.setGuid(guid);
 		}
 		regulationRepository.save(regulation);
+	}
+	
+	public List<Regulation> findAll() {
+		return regulationRepository.findAll();
+	}
+
+	public Regulation findByGuid(String guid) {
+		return regulationRepository.findByGuid(guid);
+	}
+
+	public void delete(Regulation regulation) {
+		regulationRepository.delete(regulation);
 	}
 
 }
