@@ -24,22 +24,48 @@ public class RiskController {
 	@Autowired
 	private ParameterService parameterService;
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String riskForm(Risk risk, Model model){
 
 		List<Parameter> stdFreqs = parameterService.findByParatype("stdfreq");
 		model.addAttribute("stdFreqs", stdFreqs);
+		model.addAttribute("update", false);
+		model.addAttribute("show", false);
 				
 		return "risk";
 	}
 	
-	@RequestMapping(value="/create", method=RequestMethod.POST)
+	@RequestMapping(value="/show", method=RequestMethod.GET)
+	public String showRisk(@RequestParam("guid") String guid, Model model) {
+		
+		Risk risk = riskService.findByGuid(guid);
+		model.addAttribute("risk", risk);
+		model.addAttribute("update", false);
+		model.addAttribute("show", true);
+		
+		return "risk";
+		
+	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=create")
 	public String createRisk(Risk risk, Model model){
 		
 		riskService.save(risk);
 		model.addAttribute("successMessage", "Risk created sucessfully!");
 		
-		return "risk";
+		//return "risk";
+		return "redirect:list";
+		
+	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=update")
+	public String updateRisk(Risk risk, Model model){
+		
+		riskService.save(risk);
+		model.addAttribute("successMessage", "Risk updated sucessfully!");
+		
+		//return "risk";
+		return "redirect:list";
 		
 	}
 	
@@ -70,6 +96,7 @@ public class RiskController {
 		
 		Risk risk = riskService.findByGuid(guid);
 		model.addAttribute("risk", risk);
+		model.addAttribute("update", true);
 		
 		return "risk";
 		
