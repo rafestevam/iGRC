@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -88,6 +89,9 @@ public class Risk {
 	
 	@ManyToMany(mappedBy="risks")
 	private List<Regulation> regulations = new ArrayList<Regulation>();
+	
+	@ManyToOne(targetEntity = RiskCategory.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	private RiskCategory riskcategory;
 	
 	public List<RiskAssessment> getRiskassessments() {
 		return riskassessments;
@@ -285,6 +289,25 @@ public class Risk {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
+	public String getResQLProbability() {
+		return resQLProbability;
+	}
+	public void setResQLProbability(String resQLProbability) {
+		this.resQLProbability = resQLProbability;
+	}
+	public List<Regulation> getRegulations() {
+		return regulations;
+	}
+	public void setRegulations(List<Regulation> regulations) {
+		this.regulations = regulations;
+	}
+	public RiskCategory getRiskcategory() {
+		return riskcategory;
+	}
+	public void setRiskcategory(RiskCategory riskcategory) {
+		this.riskcategory = riskcategory;
+	}
+	
 	
 	
 }
