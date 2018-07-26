@@ -2,10 +2,11 @@ package br.com.reliabletech.igrc.models;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -39,7 +40,9 @@ public class RiskAssessment {
 	private String documents;	
 	
 		
-	@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	//@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="risk_guid")
 	private Risk risk;
 	
 	public String getName() {

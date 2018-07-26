@@ -1,9 +1,10 @@
 package br.com.reliabletech.igrc.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,9 @@ public class ControlAssessment {
 	@Lob
 	private String description;
 
-	@ManyToOne(targetEntity = Control.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	//@ManyToOne(targetEntity = Control.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="control_guid")
 	private Control control;
 
 	public String getName() {

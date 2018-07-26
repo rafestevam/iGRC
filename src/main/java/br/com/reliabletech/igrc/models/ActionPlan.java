@@ -1,10 +1,11 @@
 package br.com.reliabletech.igrc.models;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -66,7 +67,9 @@ public class ActionPlan {
 	
 	private String documents;
 	
-	@ManyToOne(targetEntity = Issue.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	//@ManyToOne(targetEntity = Issue.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="issue_guid")
 	private Issue issue;
 
 	public String getName() {

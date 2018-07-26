@@ -7,9 +7,9 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -90,18 +90,19 @@ public class Issue {
 	private String documents;
 
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_issue_actplan", joinColumns=@JoinColumn(name="issue_id"), inverseJoinColumns=@JoinColumn(name="ActionPlan_id"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_issue_actplan", joinColumns=@JoinColumn(name="issue_id"), inverseJoinColumns=@JoinColumn(name="ActionPlan_id"))
 	private List<ActionPlan> actionplans = new ArrayList<ActionPlan>();
 
-	@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	//@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="risk_guid")
 	private Risk risk;
 	
-	@ManyToOne(targetEntity = Control.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	//@ManyToOne(targetEntity = Control.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="control_guid")
 	private Control control;
-	
-	
-	
 	
 	public String getSystemAffected() {
 		return systemAffected;

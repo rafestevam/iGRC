@@ -77,12 +77,12 @@ public class Risk {
 	@JoinTable(name="jt_risk_controls", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_risk_issue", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_risk_issue", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_guid"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_guid"))
 	private List<RiskAssessment> riskassessments = new ArrayList<RiskAssessment>();
 	
 	@ManyToMany(mappedBy="risks")
