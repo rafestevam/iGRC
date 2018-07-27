@@ -32,4 +32,8 @@ public class ControlServiceImpl implements ControlService {
 		return controlRepository.findByGuid(guid);
 	}
 
+	public void delete(Control control) {
+		controlRepository.delete(control);
+	}
+
 }

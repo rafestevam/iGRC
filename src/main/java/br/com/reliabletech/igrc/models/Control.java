@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -52,16 +50,16 @@ public class Control {
 	
 	private String documents;
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_control_assess", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="ControlAssessment_guid"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_control_control_assess", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="ControlAssessment_guid"))
 	private List<ControlAssessment> controlassessment = new ArrayList<ControlAssessment>();
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="Test_guid"))
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
+	//@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="Test_guid"))
 	private List<Test> tests = new ArrayList<Test>();
 
 	@ManyToMany(mappedBy="controls")

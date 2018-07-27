@@ -14,61 +14,68 @@
 			
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Regulation</li>
-				<li class="breadcrumb-item active">New Regulation</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Regulation Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Regulation Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Regulation</li>
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/regulation/create}" method="POST" th:object="${regulation}">
+			<form th:action="@{/regulation/save}" method="POST" th:object="${regulation}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
 							<label for="regID">Regulation ID</label>
-							<input type="text" th:field="*{regID}" class="form-control">
+							<input type="text" th:field="*{regID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> 
+							<input type="hidden" th:attr="name='guid'" th:value="${regulation.guid}">
 						</div>
 						<div class="form-group">
 							<label for="name">Name</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="ruleOfRegulation">Rule of Regulation</label>
-							<input type="date" th:field="*{ruleOfRegulation}" class="form-control">
+<!-- 							<input type="date" th:field="*{ruleOfRegulation}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> -->
 						</div>						
 						<div class="form-group">
 							<label class="checkbox-inline">Obsolete</label>
-							<input type="checkbox" value=true th:field="*{obsolete}">
+							<input type="checkbox" value=true th:field="*{obsolete}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="responsibleArea">Responsible Area</label>
-							<input type="text" th:field="*{responsilbleArea}" class="form-control">
+							<input type="text" th:field="*{responsilbleArea}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="affectedProcess">Affected Processes</label>
-							<input type="text" th:field="*{affectedProcess}" class="form-control">
+							<input type="text" th:field="*{affectedProcess}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="affectedRisks">Affected Risks</label>
-							<input type="text" th:field="*{affectedRisks}" class="form-control">
+							<input type="text" th:field="*{affectedRisks}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="affectedControls">Affected Controls</label>
-							<input type="text" th:field="*{affectedControls}" class="form-control">
+							<input type="text" th:field="*{affectedControls}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
 					</div>
-				
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Regulation View</a>
+					</div>
 				</div>
 			</form>
 					

@@ -541,8 +541,8 @@ public class ApplicationInitializationComp {
 			Parameter parameterz = new Parameter();		
 			parameterz.setParamid("dbparamstd");
 			parameterz.setParatype("std_init");
-			parameterz.setName("Stantard Parameter Table");
-			parameterz.setDescription("Stantard parameter to check if the table is fulfilled.");
+			parameterz.setName("Standard Parameter Table");
+			parameterz.setDescription("Standard parameter to check if the table is fulfilled.");
 			parameterz.setVisible(false);
 			parameterz.setEnabled(true);
 			parameterz.setLanguage("EN");

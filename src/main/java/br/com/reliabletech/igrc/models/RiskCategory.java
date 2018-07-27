@@ -50,7 +50,7 @@ public class RiskCategory {
 	private String documents;
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_categ_risk", joinColumns=@JoinColumn(name="RiskCategory_id"), inverseJoinColumns=@JoinColumn(name="Risk_id"))
+	@JoinTable(name="jt_categ_risk", joinColumns=@JoinColumn(name="RiskCategory_guid"), inverseJoinColumns=@JoinColumn(name="Risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
 
 	public String getName() {
@@ -69,8 +69,6 @@ public class RiskCategory {
 		this.description = description;
 	}
 
-
-	
 	public BigDecimal getResQtPotDamage() {
 		return resQtPotDamage;
 	}
@@ -174,7 +172,5 @@ public class RiskCategory {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
-	
-	
 
 }

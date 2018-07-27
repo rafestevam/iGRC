@@ -14,7 +14,9 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Risk</li>
-				<li class="breadcrumb-item active">New Risk</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Risk Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Risk Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Risk</li>
 			</ol>
 
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>

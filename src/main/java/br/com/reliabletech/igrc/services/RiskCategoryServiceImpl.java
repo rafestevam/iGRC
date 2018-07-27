@@ -1,5 +1,6 @@
 package br.com.reliabletech.igrc.services;
 
+
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,4 @@ public class RiskCategoryServiceImpl implements RiskCategoryService {
 		}
 		riskcategoryRepository.save(riskcategory);
 	}
-
 }
