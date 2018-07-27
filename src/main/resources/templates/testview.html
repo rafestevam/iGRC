@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:include="fragments/iGRC.html :: headerfiles"></th:block>
-<title>iGRC :: Regulations</title>
+<title>iGRC :: Tests</title>
 </head>
 <body class="fixed-nav sticky-footer bg-dark">
 
@@ -13,15 +13,15 @@
 		<div class="container-fluid">
 
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Regulation</li>
-				<li class="breadcrumb-item active">Regulation View</li>
+				<li class="breadcrumb-item">Test</li>
+				<li class="breadcrumb-item active">Test View</li>
 			</ol>
 
 			<div class="alert alert-success" th:if="${successMessage}"
 				th:text="${successMessage}"></div>
 
 			<div class="card mb-3">
-				<div class="card-header">Regulation List</div>
+				<div class="card-header">Test List</div>
 				<div class="card-body">
 
 					<div class="table-responsive">
@@ -36,23 +36,23 @@
 											<th class="sorting_asc" tabindex="0"
 												aria-controls="dataTable" rowspan="1" colspan="1"
 												aria-sort="ascending"
-												aria-label="Regulation ID: activate to sort column descending"
-												style="width: 10%;">Regulation ID</th>
+												aria-label="Test ID: activate to sort column descending"
+												style="width: 10%;">Test ID</th>
 											<th class="sorting" tabindex="0" aria-controls="dataTable"
 												rowspan="1" colspan="1"
 												aria-label="Name: activate to sort column ascending"
 												style="width: 30%;">Name</th>
 											<th class="sorting" tabindex="0" aria-controls="dataTable"
 												rowspan="1" colspan="1"
-												aria-label="Description: activate to sort column ascending"
-												style="width: 50%;">Description</th>
+												aria-label="Walkthrough: activate to sort column ascending"
+												style="width: 50%;">Walkthrough</th>
 											<th style="width: 5%;">Update</th>
 											<th style="width: 5%;">Delete</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th rowspan="1" colspan="1">Regulation ID</th>
+											<th rowspan="1" colspan="1">Test ID</th>
 											<th rowspan="1" colspan="1">Name</th>
 											<th rowspan="1" colspan="1">Description</th>
 											<th rowspan="1" colspan="1">Update</th>
@@ -60,14 +60,14 @@
 										</tr>
 									</tfoot>
 									<tbody>
-										<tr role="row" class="odd" th:each="regulation : ${regulations}">
+										<tr role="row" class="odd" th:each="test : ${tests}">
 											<td class="sorting_1"><a
-												th:href="@{/regulation/show(guid=${regulation.guid})}"
-												th:text="${regulation.regID}"></a></td>
-											<td th:text="${regulation.name}"></td>
-											<td th:text="${regulation.description}"></td>
-											<td align="center"><a th:href="@{/regulation/update(guid=${regulation.guid})}"><i class="fas fa-edit"></i></a></td>
-											<td align="center"><a th:href="@{/regulation/delete(guid=${regulation.guid})}"><i class="far fa-trash-alt"></i></a></td>
+												th:href="@{/test/show(guid=${test.guid})}"
+												th:text="${test.testID}"></a></td>
+											<td th:text="${test.name}"></td>
+											<td th:text="${test.walkthrough}"></td>
+											<td align="center"><a th:href="@{/test/update(guid=${test.guid})}"><i class="fas fa-edit"></i></a></td>
+											<td align="center"><a th:href="@{/test/delete(guid=${test.guid})}"><i class="far fa-trash-alt"></i></a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -77,7 +77,7 @@
 
 				</div>
 				<div class="card-footer">
-					<a th:href="@{/regulation/create}" class="btn btn-primary">Create New Regulation</a>
+					<a th:href="@{/test/execute}" class="btn btn-primary">Execute New Test</a>
 				</div>
 
 			</div>

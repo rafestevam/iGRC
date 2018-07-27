@@ -1,5 +1,6 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,17 @@ public class TestServiceImpl implements TestService {
 			test.setGuid(guid);
 		}
 		testRepository.save(test);
+	}
+	
+	public List<Test> findAll() {
+		return testRepository.findAll();
+	}
+
+	public Test findByGuid(String guid) {
+		return testRepository.findByGuid(guid);
+	}
+
+	public void delete(Test test) {
+		testRepository.delete(test);
 	}
 }

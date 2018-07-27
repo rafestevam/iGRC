@@ -18,6 +18,9 @@ public class Test {
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
 	private String guid;
+	
+	@NotNull
+	private String testID;	
 
 	@NotNull
 	private String name;
@@ -312,6 +315,14 @@ public class Test {
 
 	public void setGuid(String guid) {
 		this.guid = guid;
+	}
+
+	public String getTestID() {
+		return testID;
+	}
+
+	public void setTestID(String testID) {
+		this.testID = testID;
 	}
 
 	
