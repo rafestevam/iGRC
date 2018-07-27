@@ -27,7 +27,8 @@
 					<div class="card-body">
 						<div class="form-group">
 							<label for="regID">Regulation ID</label>
-							<input type="text" th:field="*{regID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <input type="hidden" th:attr="name='guid'" th:value="${regulation.guid}">
+							<input type="text" th:field="*{regID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> 
+							<input type="hidden" th:attr="name='guid'" th:value="${regulation.guid}">
 						</div>
 						<div class="form-group">
 							<label for="name">Name</label>

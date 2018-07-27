@@ -68,10 +68,10 @@ public class RegulationController {
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public String RegulationList(Model model){
+	public String regulationList(Model model){
 		
-		List<Regulation> regulation = regulationService.findAll();
-		model.addAttribute("regulations", regulation);
+		List<Regulation> regulations = regulationService.findAll();
+		model.addAttribute("regulations", regulations);
 		
 		return "regulationview";
 		
@@ -85,7 +85,7 @@ public class RegulationController {
 		List<Regulation> regulations = regulationService.findAll();
 		model.addAttribute("regulations", regulations);
 		
-		return "Regulationlist";
+		return "regulationlist";
 		
 	}
 	
@@ -96,7 +96,7 @@ public class RegulationController {
 		model.addAttribute("regulation", regulation);
 		model.addAttribute("update", true);
 		
-		return "Regulation";
+		return "regulation";
 		
 	}
 	
