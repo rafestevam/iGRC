@@ -6,4 +6,7 @@ import br.com.reliabletech.igrc.models.Issue;
 
 public interface IssueRepository extends JpaRepository<Issue, Long>{
 
+	public Issue findByGuid(String guid);
+	
+
 }

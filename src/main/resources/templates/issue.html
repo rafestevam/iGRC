@@ -8,100 +8,106 @@
 
 	<nav th:replace="fragments/iGRC.html :: mainNav"></nav>
 	
-	
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Issue</li>
-				<li class="breadcrumb-item active">New Issue</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Issue Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Issue Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">Issue Risk</li>
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/issue/create}" method="POST" th:object="${issue}">
+			<form th:action="@{/issue/save}" method="POST" th:object="${issue}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
 							<label for="issueID">Issue ID</label>
-							<input type="text" th:field="*{issueID}" class="form-control">
+							<input type="text" th:field="*{issueID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${issue.guid}">
 						</div>
 						<div class="form-group">
 							<label for="name">Issue Name</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="description">Issue Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="issueCreator">Issue Creator</label>
-							<input type="text" th:field="*{issueCreator}" class="form-control">
+							<input type="text" th:field="*{issueCreator}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="issueOwner">Issue Owner</label>
-							<input type="text" th:field="*{issueOwner}" class="form-control">
+							<input type="text" th:field="*{issueOwner}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="issueStatus">Issue Status</label>
-							<input type="text" th:field="*{issueStatus}" class="form-control">	
+							<input type="text" th:field="*{issueStatus}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">	
 						</div>
 						<div class="form-group">
 							<label for="rootCause">Root Cause</label>
-							<textarea cols="20" th:field="*{rootCause}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{rootCause}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="situationFound">Situation Found</label>
-							<textarea cols="20" th:field="*{situationFound}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{situationFound}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="recommendation">Recommendation</label>
-							<textarea cols="20" th:field="*{recommendation}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{recommendation}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="issueSource">Source</label>
-							  <select class="form-control" th:field="*{issueSource}">
+							  <select class="form-control" th:field="*{issueSource}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 							    <option th:each="defenseLine : ${defenseLines}" value="${defenseLine.paramid}" th:utext="${defenseLine.name}">
 							  </select>
 						</div>
 						
 						<div class="form-group">
 							<label for="riskAssigned">Risk Assigned</label>
-							<input type="text" th:field="*{riskAssigned}" class="form-control">
+							<input type="text" th:field="*{riskAssigned}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="processAssigned">Process Assigned</label>
-							<input type="text" th:field="*{processAssigned}" class="form-control">
+							<input type="text" th:field="*{processAssigned}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="systemAffected">System Affected</label>
-							<input type="text" th:field="*{systemAffected}" class="form-control">
+							<input type="text" th:field="*{systemAffected}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label class="checkbox-inline">Recurrent </label>
-							<input type="checkbox" value=false th:field="*{recurrent}">
+							<input type="checkbox" value=false th:field="*{recurrent}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="plannedEndDate">Planned End Date</label>
-							<input type="date" th:field="*{plannedEndDate}" class="form-control">
+<!-- 							<input type="date" th:field="*{plannedEndDate}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> -->
 						</div>
 						<div class="form-group">
 							<label for="plannedFupDate">Planned FUP Date</label>
-							<input type="date" th:field="*{plannedFupDate}" class="form-control">
+<!-- 							<input type="date" th:field="*{plannedFupDate}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> -->
 						</div>
 						<div class="form-group">
 							<label for="obsCreator">Observation</label>
-							<textarea cols="20" th:field="*{obsCreator}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{obsCreator}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
+					</div>
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Issue View</a>
 					</div>
 				
 				</div>
