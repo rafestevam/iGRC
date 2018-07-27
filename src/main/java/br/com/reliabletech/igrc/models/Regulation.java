@@ -49,12 +49,10 @@ public class Regulation {
 	private String documents;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-
 	@JoinTable(name="jt_reg_risk", joinColumns=@JoinColumn(name="regulation_guid"), inverseJoinColumns=@JoinColumn(name="risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-
 	@JoinTable(name="jt_reg_control", joinColumns=@JoinColumn(name="regulation_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
 

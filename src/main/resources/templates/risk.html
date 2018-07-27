@@ -26,7 +26,9 @@
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
-							<label for="risk_id">Risk ID</label> <input type="text" th:field="*{riskid}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <input type="hidden" th:attr="name='guid'" th:value="${risk.guid}">
+							<label for="risk_id">Risk ID</label>
+							<input type="text" th:field="*{riskid}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${risk.guid}">
 						</div>
 						<div class="form-group">
 							<label for="name">Risk Name</label> <input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">

@@ -16,4 +16,13 @@ public interface ParameterService {
 	public List<Parameter> findNonExactParamid(String paramid);
 	
 	public List<Parameter> findByParatype(String paratype);
+	
+	public List<Parameter> findAll();
+	
+	public Parameter findByGuid(String guid);
+	
+	public void delete(Parameter parameter);
+	
+	public List<Parameter> findTop10();
+	
 }

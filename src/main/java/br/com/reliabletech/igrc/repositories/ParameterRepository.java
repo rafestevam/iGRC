@@ -15,5 +15,10 @@ public interface ParameterRepository extends JpaRepository<Parameter, Long>{
 	List<Parameter> findNonExactParamid(String paramid);
 	
 	List<Parameter> findByParatype(String paratype);
+	
+	public Parameter findByGuid(String guid);
+	
+	@Query(value = "SELECT * FROM Parameter LIMIT 5", nativeQuery = true)
+	public List<Parameter> findTop10();
 
 }

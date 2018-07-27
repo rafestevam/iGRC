@@ -35,5 +35,21 @@ public class ParameterServiceImpl implements ParameterService {
 	public List<Parameter> findByParatype(String paratype) {
 		return parameterRepository.findByParatype(paratype);
 	}
+	
+	public List<Parameter> findAll() {
+		return parameterRepository.findAll();
+	}
+	
+	public Parameter findByGuid(String guid) {
+		return parameterRepository.findByGuid(guid);
+	}
+		
+	public void delete(Parameter parameter) {
+		parameterRepository.delete(parameter);
+	}
+
+	public List<Parameter> findTop10() {
+		return parameterRepository.findTop10();
+	}
 
 }
