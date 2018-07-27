@@ -68,6 +68,15 @@ public class Control {
 	@ManyToMany(mappedBy="controls")
 	private List<Regulation> regulations = new ArrayList<Regulation>();
 	
+	private Boolean assigned;
+	
+	public Control() {
+	}
+	
+	public Control(String guid) {
+		this.guid = guid;
+	}
+
 	public String getControlid() {
 		return controlid;
 	}
@@ -226,6 +235,14 @@ public class Control {
 
 	public void setGuid(String guid) {
 		this.guid = guid;
+	}
+
+	public boolean isAssigned() {
+		return assigned;
+	}
+
+	public void setAssigned(boolean assigned) {
+		this.assigned = assigned;
 	}
 	
 }

@@ -35,6 +35,11 @@ public class RiskServiceImpl implements RiskService {
 	public void delete(Risk risk) {
 		riskRepository.delete(risk);
 	}
+
+	@Override
+	public boolean existsByGuid(String guid) {
+		return riskRepository.existsByGuid(guid);
+	}
 	
 	
 

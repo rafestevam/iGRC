@@ -300,6 +300,4 @@ public class Risk {
 		this.riskcategory = riskcategory;
 	}
 	
-	
-	
 }

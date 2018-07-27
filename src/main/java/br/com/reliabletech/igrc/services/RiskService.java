@@ -17,4 +17,6 @@ public interface RiskService {
 	
 	public void delete(Risk risk);
 	
+	public boolean existsByGuid(String guid);
+	
 }

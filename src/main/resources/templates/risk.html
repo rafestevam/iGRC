@@ -22,79 +22,202 @@
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
 			<form th:action="@{/risk/save}" method="POST" th:object="${risk}">
-				<div class="card mb-3">
-					<div class="card-header">Basic Data</div>
-					<div class="card-body">
-						<div class="form-group">
-							<label for="risk_id">Risk ID</label>
-							<input type="text" th:field="*{riskid}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-							<input type="hidden" th:attr="name='guid'" th:value="${risk.guid}">
-						</div>
-						<div class="form-group">
-							<label for="name">Risk Name</label> <input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
-						<div class="form-group">
-							<label for="description">Risk Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="cause">Risk Cause</label>
-							<textarea cols="20" th:field="*{cause}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="consequence">Risk Consequence</label>
-							<textarea cols="20" th:field="*{consequence}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="process">Process Related</label> <input type="text" th:field="*{process}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
-						<div class="form-group">
-							<label for="rule">Rule Related</label> <input type="text" th:field="*{rule}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
-						<div class="form-group">
-							<label for="riskCateg">Risk Category</label> <input type="text" th:field="*{riskCateg}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
-						<div class="form-group">
-							<label for="riskManager">Risk Manager</label> <input type="text" th:field="*{riskManager}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
+			<ul class="nav nav-tabs" id="nav-tab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#riskdata" role="tab">Risk Data</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#assignments" role="tab">Assignments</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="riskdata" class="tab-pane fade show active" role="tabpanel" style="padding-top: 5px;">
+						<div class="card mb-3" >
+							<div class="card-header">Basic Data</div>
+							<div class="card-body">
+								<div class="form-group">
+									<label for="risk_id">Risk ID</label> <input type="text" th:field="*{risk_id}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <input type="hidden" th:attr="name='guid'" th:value="${risk.guid}">
+								</div>
+								<div class="form-group">
+									<label for="name">Risk Name</label> <input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
+								<div class="form-group">
+									<label for="description">Risk Description</label>
+									<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
+								</div>
+								<div class="form-group">
+									<label for="cause">Risk Cause</label>
+									<textarea cols="20" th:field="*{cause}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
+								</div>
+								<div class="form-group">
+									<label for="consequence">Risk Consequence</label>
+									<textarea cols="20" th:field="*{consequence}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>
+								</div>
+								<div class="form-group">
+									<label for="process">Process Related</label> <input type="text" th:field="*{process}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
+								<div class="form-group">
+									<label for="rule">Rule Related</label> <input type="text" th:field="*{rule}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
+								<div class="form-group">
+									<label for="riskCateg">Risk Category</label> <input type="text" th:field="*{riskCateg}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
+								<div class="form-group">
+									<label for="riskManager">Risk Manager</label> <input type="text" th:field="*{riskManager}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
 
-						<div class="form-group">
-							<label for="assessActiv">Assessment Activity</label> <input type="text" th:field="*{assessActiv}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
+								<div class="form-group">
+									<label for="assessActiv">Assessment Activity</label> <input type="text" th:field="*{assessActiv}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
 
-						<div class="form-group">
-							<label for="assessFreq">Assessment Frequency</label> <select class="form-control" th:field="*{assessFreq}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-								<option th:each="stdFreq : ${stdFreqs}" value="${stdFreq.paramid}" th:utext="${stdFreq.name}">
-							</select>
-						</div>
+								<div class="form-group">
+									<label for="assessFreq">Assessment Frequency</label> <select class="form-control" th:field="*{assessFreq}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+										<option th:each="stdFreq : ${stdFreqs}" value="${stdFreq.paramid}" th:utext="${stdFreq.name}">
+									</select>
+								</div>
 
-						<div class="form-group">
-							<label>Risk Type:</label> <br> <label class="checkbox-inline">Finance Report </label> <input type="checkbox" value=false th:field="*{rtFinReport}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Compliance </label> <input type="checkbox" value=false th:field="*{rtCompliance}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Operations </label> <input type="checkbox" value=false th:field="*{rtOperations}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Strategic </label> <input type="checkbox" value=false th:field="*{rtStrategic}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
-						<div class="form-group">
-							<label>Assertions:</label> <br> <label class="checkbox-inline">Existence or Occurrence</label> <input type="checkbox" value=false th:field="*{asserExistOcc}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Completeness </label> <input type="checkbox" value=false th:field="*{asserComplete}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Rights and Obligations </label> <input type="checkbox" value=false th:field="*{asserOblgRight}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <br> <label class="checkbox-inline">Valuation and Allocation</label> <input type="checkbox" value=false th:field="*{asserEvaluation}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Presentation and Disclosure </label> <input type="checkbox" value=false th:field="*{asserDisclosure}"
-								th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"
-							> <label class="checkbox-inline">&nbsp N/A </label> <input type="checkbox" value=false th:field="*{asserNA}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
+								<div class="form-group">
+									<label>Risk Type:</label> <br> <label class="checkbox-inline">Finance Report </label> <input type="checkbox" value=false th:field="*{rtFinReport}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Compliance </label> <input type="checkbox" value=false th:field="*{rtCompliance}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Operations </label> <input type="checkbox" value=false th:field="*{rtOperations}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Strategic </label> <input type="checkbox" value=false th:field="*{rtStrategic}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
+								<div class="form-group">
+									<label>Assertions:</label> <br> <label class="checkbox-inline">Existence or Occurrence</label> <input type="checkbox" value=false th:field="*{asserExistOcc}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Completeness </label> <input type="checkbox" value=false th:field="*{asserComplete}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Rights and Obligations </label> <input type="checkbox" value=false th:field="*{asserOblgRight}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <br> <label class="checkbox-inline">Valuation and Allocation</label> <input type="checkbox" value=false th:field="*{asserEvaluation}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> <label class="checkbox-inline">&nbsp Presentation and Disclosure </label> <input type="checkbox" value=false th:field="*{asserDisclosure}"
+										th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"
+									> <label class="checkbox-inline">&nbsp N/A </label> <input type="checkbox" value=false th:field="*{asserNA}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
 
 
-						<div class="form-group">
-							<label for="documents">Documents</label> <input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
-						</div>
+								<div class="form-group">
+									<label for="documents">Documents</label> <input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+								</div>
 
+							</div>
+							<div class="card-footer" th:if="${#bools.isFalse(show)}">
+								<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+								<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+								<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
+							</div>
+							<div class="card-footer" th:if="${#bools.isTrue(show)}">
+								<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Risk List</a>
+							</div>
+
+						</div>
+				</div>
+
+				<div id="assignments" class="tab-pane fade" role="tabpanel">
+
+					<ul class="nav nav-pills mb-3" id="assign-tab" role="tablist" style="padding-top: 5px;">
+						<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#controls" role="tab">Controls</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#regulations" role="tab">Regulations</a></li>
+					</ul>
+
+					<div id="controls" class="tab-pane fade show active" role="tabpanel">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-auto">
+									<div class="container-fluid" style="padding-bottom: 10px;">
+										<a class="btn btn-light" href="#" data-toggle="modal" data-target="#assignControlModal" th:if="${#bools.isFalse(show)}">Create Assignment</a> 
+										<a class="btn btn-light" href="#" th:if="${#bools.isFalse(show)}">Remove Assignment</a>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="table-responsive">
+									<div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+										<div class="col-sm-12">
+											<table class="table table-bordered dataTable" id="controlsTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+												<thead>
+													<tr role="row">
+														<th style="width: 2%;" th:if="${#bools.isFalse(show)}"></th>
+														<th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 10%;">Control ID</th>
+														<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 30%;">Control Name</th>
+														<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 58%;">Control Description</th>
+													</tr>
+												</thead>
+												<tfoot>
+													<tr>
+														<th rowspan="1" colspan="1" th:if="${#bools.isFalse(show)}"></th>
+														<th rowspan="1" colspan="1">Control ID</th>
+														<th rowspan="1" colspan="1">Control Name</th>
+														<th rowspan="1" colspan="1">Control Description</th>
+													</tr>
+												</tfoot>
+												<tbody>
+													<tr role="row" class="odd" th:each="control, status : ${risk.controls}">
+														<td th:if="${#bools.isFalse(show)}"><input type="checkbox"><input type="hidden" th:attr="name='controls[__${status.index}__].guid'" th:value="${control.guid}" ></td>
+														<td class="sorting_1"><a href="#" th:text="${control.controlid}"></a></td>
+														<td th:text="${control.name}"></td>
+														<td th:text="${control.description}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
-					<div class="card-footer" th:if="${#bools.isFalse(show)}">
-						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
-						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
-						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
-					</div>
-					<div class="card-footer" th:if="${#bools.isTrue(show)}">
-						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Risk View</a>
+
+					<div id="regulations" class="tab-pane fade" role="tabpanel">
+						<h4>Tests Lorem ipsum dolor</h4>
 					</div>
 
 				</div>
+				<div th:replace="this :: assignControlModal"></div>
+			</div>
 			</form>
 
+		</div>
+	</div>
+
+	<div class="modal fade bd-example-modal-lg" id="assignControlModal" tabindex="-1" role="dialog" aria-labelledby="assignControlModalLabel" aria-hidden="true" th:fragment="assignControlModal">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+<!-- 				<form th:action="@{/risk/attachControl}" method="POST" th:object="${risk}"> -->
+
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Control Assignment</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<i class="far fa-times-circle"></i>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						Select controls to assign<br />
+
+						<div class="table-responsive">
+							<div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+								<div class="col-sm-12">
+									<table class="table table-bordered dataTable" id="controlsAsgTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+										<thead>
+											<tr role="row">
+												<th style="width: 2%;"></th>
+												<th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 10%;">Control ID</th>
+												<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 30%;">Control Name</th>
+												<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 58%;">Control Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr role="row" class="odd" th:each="control, status : ${controls}">
+												<td>
+<!-- 													<input type="checkbox" th:field="*{controls}" th:value="${control.id}"> -->
+													<input type="checkbox" name="cguid" th:value="${control.guid}">
+<!-- 													<input type="hidden" th:attr="name='controls[__${status.index}__].guid'" th:value="${control.guid}"> -->
+												</td>
+												<td class="sorting_1" th:text="${control.controlid}"></td>
+												<td th:text="${control.name}"></td>
+												<td th:text="${control.description}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary" type="submit" name="action" value="assign">Assign</button>
+					</div>
+<!-- 				</form> -->
+			</div>
 		</div>
 	</div>
 
