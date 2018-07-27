@@ -15,7 +15,7 @@
 				<li class="breadcrumb-item">Issue</li>
 				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Issue Show</li>
 				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Issue Update</li>
-				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">Issue Risk</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Issue</li>
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>

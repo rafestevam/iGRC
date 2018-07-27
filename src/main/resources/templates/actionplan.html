@@ -14,79 +14,85 @@
 			
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Action Plan</li>
-				<li class="breadcrumb-item active">New Action Plan</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Action Plan Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Action Plan Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Action Plan</li>
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/actionplan/create}" method="POST" th:object="${actionplan}">
+			<form th:action="@{/actionplan/save}" method="POST" th:object="${actionplan}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
+							<label for="apID">Action Plan ID</label>
+							<input type="text" th:field="*{apID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${actionplan.guid}">
+						</div>
+						<div class="form-group">
 							<label for="name">Action Plan Name</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
-						</div>
-						<div class="form-group">
-							<label for="apID">Action Plan ID</label>
-							<input type="text" th:field="*{apID}" class="form-control">
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="apCreator">Action Plan Creator</label>
-							<input type="text" th:field="*{apCreator}" class="form-control">
+							<input type="text" th:field="*{apCreator}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="apOwner">Action Plan Owner</label>
-							<input type="text" th:field="*{apOwner}" class="form-control">
+							<input type="text" th:field="*{apOwner}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="apReviewer">Action Plan Reviewer</label>
-							<input type="text" th:field="*{apReviewer}" class="form-control">
+							<input type="text" th:field="*{apReviewer}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="apStatus">Action Plan Status</label>
-							<input type="text" th:field="*{apStatus}" class="form-control">	
+							<input type="text" th:field="*{apStatus}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">	
 						</div>
 						<div class="form-group">
 							<label for="issueAssigned">Issue Assigned </label>
-							<input type="text" th:field="*{issueAssigned}" class="form-control">
+							<input type="text" th:field="*{issueAssigned}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="riskAssigned">Risk Assigned </label>
-							<input type="text" th:field="*{riskAssigned}" class="form-control">
+							<input type="text" th:field="*{riskAssigned}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>						
 
 						<div class="form-group">
 							<label for="plannedEndDate">Planned End Date</label>
-							<input type="date" th:field="*{plannedEndDate}" class="form-control">
+<!-- 							<input type="date" th:field="*{plannedEndDate}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> -->
 						</div>
 						<div class="form-group">
 							<label for="plannedFupDate">Planned FUP Date</label>
-							<input type="date" th:field="*{plannedFupDate}" class="form-control">
+<!-- 							<input type="date" th:field="*{plannedFupDate}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"> -->
 						</div>
 						<div class="form-group">
 							<label class="checkbox-inline">Replanned </label>
-							<input type="checkbox" value=false th:field="*{replanned}">
+							<input type="checkbox" value=false th:field="*{replanned}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="obsCreator">Observation</label>
-							<textarea cols="20" th:field="*{obsCreator}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{obsCreator}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
 					</div>
-				
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Action Plan View</a>
+					</div>
 				</div>
 			</form>
 					
