@@ -28,4 +28,8 @@ public class ControlServiceImpl implements ControlService {
 		return controlRepository.findAll();
 	}
 
+	public Control findByGuid(String guid) {
+		return controlRepository.findByGuid(guid);
+	}
+
 }

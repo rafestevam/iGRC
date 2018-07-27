@@ -10,4 +10,6 @@ public interface ControlService {
 	
 	public List<Control> findAll();
 	
+	public Control findByGuid(String guid);
+	
 }

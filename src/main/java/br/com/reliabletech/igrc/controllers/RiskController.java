@@ -1,10 +1,15 @@
 package br.com.reliabletech.igrc.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,14 +35,23 @@ public class RiskController {
 	private ParameterService parameterService;
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public String riskForm(Risk risk, Model model){
-
+	public String riskForm(@ModelAttribute("risk") Risk risk, Model model){
+		
 		List<Control> controls = controlService.findAll();
+		List<Control> controlsAux = new ArrayList<Control>();
+		
+		controls.forEach(
+				control -> {
+					if(!risk.getControls().contains(control))
+						controlsAux.add(control);
+				}
+		);
+		
 		List<Parameter> stdFreqs = parameterService.findByParatype("stdfreq");
 		model.addAttribute("stdFreqs", stdFreqs);
 		model.addAttribute("update", false);
 		model.addAttribute("show", false);
-		model.addAttribute("controls", controls);
+		model.addAttribute("controls", controlsAux);
 				
 		return "risk";
 	}
@@ -55,8 +69,10 @@ public class RiskController {
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=create")
-	public String createRisk(Risk risk, Model model){
+	public String createRisk(@ModelAttribute("risk") Risk risk, Model model){
 		
+		loadControls(risk);
+		risk.setGuid(getGuid());
 		riskService.save(risk);
 		model.addAttribute("successMessage", "Risk created sucessfully!");
 		
@@ -68,6 +84,7 @@ public class RiskController {
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=update")
 	public String updateRisk(Risk risk, Model model){
 		
+		loadControls(risk);
 		riskService.save(risk);
 		model.addAttribute("successMessage", "Risk updated sucessfully!");
 		
@@ -102,20 +119,57 @@ public class RiskController {
 	public String updateRisk(@RequestParam("guid") String guid, Model model){
 		
 		Risk risk = riskService.findByGuid(guid);
+		
+		List<Control> controls = controlService.findAll();
+		List<Control> controlsAux = new ArrayList<Control>();
+		
+		controls.forEach(
+				control -> {
+					if(!risk.getControls().contains(control))
+						controlsAux.add(control);
+				}
+		);
+		
 		model.addAttribute("risk", risk);
 		model.addAttribute("update", true);
+		model.addAttribute("show", false);
+		model.addAttribute("controls", controlsAux);
 		
 		return "risk";
 		
 	}
 	
 	
-	@RequestMapping(value="/attachControl", method=RequestMethod.POST)
-	public String attachControls(Risk risk, String[] controls) {
+	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=assign")
+	public String attachControls(@ModelAttribute("risk") Risk risk, Model model, @RequestParam(value="cguid") String[] guids) {
+//	public String attachControls(final Risk risk, Model model) {
 		
+		Arrays.stream(guids)
+			.forEach(guid -> risk.getControls().add(
+				new Control(guid)
+			));
+		
+		loadControls(risk);
+		
+		if(riskService.existsByGuid(risk.getGuid()))
+			model.addAttribute("update", true);
+
+		if(!riskService.existsByGuid(risk.getGuid()))
+			model.addAttribute("update", false);
 		
 		
 		return "risk";
+	}
+
+	private void loadControls(Risk risk) {
+		IntStream.range(0, risk.getControls().size())
+			.forEach(idx -> risk.getControls().set(idx, 
+					                               controlService.findByGuid(risk.getControls().get(idx).getGuid()))
+					);
+	}
+	
+	private String getGuid() {
+		return UUID.randomUUID().toString();
 	}
 	
 	

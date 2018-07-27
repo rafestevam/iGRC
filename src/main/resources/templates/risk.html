@@ -19,13 +19,13 @@
 
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
+			<form th:action="@{/risk/save}" method="POST" th:object="${risk}">
 			<ul class="nav nav-tabs" id="nav-tab" role="tablist">
 				<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#riskdata" role="tab">Risk Data</a></li>
 				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#assignments" role="tab">Assignments</a></li>
 			</ul>
 			<div class="tab-content">
 				<div id="riskdata" class="tab-pane fade show active" role="tabpanel" style="padding-top: 5px;">
-					<form th:action="@{/risk/save}" method="POST" th:object="${risk}">
 						<div class="card mb-3" >
 							<div class="card-header">Basic Data</div>
 							<div class="card-body">
@@ -95,14 +95,13 @@
 							</div>
 
 						</div>
-					</form>
 				</div>
 
 				<div id="assignments" class="tab-pane fade" role="tabpanel">
 
 					<ul class="nav nav-pills mb-3" id="assign-tab" role="tablist" style="padding-top: 5px;">
 						<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#controls" role="tab">Controls</a></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tests" role="tab">Tests</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#regulations" role="tab">Regulations</a></li>
 					</ul>
 
 					<div id="controls" class="tab-pane fade show active" role="tabpanel">
@@ -110,7 +109,8 @@
 							<div class="row">
 								<div class="col-md-auto">
 									<div class="container-fluid" style="padding-bottom: 10px;">
-										<a class="btn btn-light" href="#" data-toggle="modal" data-target="#assignControlModal">Create Assignment</a> <a class="btn btn-light" href="#">Remove Assignment</a>
+										<a class="btn btn-light" href="#" data-toggle="modal" data-target="#assignControlModal" th:if="${#bools.isFalse(show)}">Create Assignment</a> 
+										<a class="btn btn-light" href="#" th:if="${#bools.isFalse(show)}">Remove Assignment</a>
 									</div>
 								</div>
 							</div>
@@ -122,7 +122,7 @@
 											<table class="table table-bordered dataTable" id="controlsTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
 												<thead>
 													<tr role="row">
-														<th style="width: 2%;"></th>
+														<th style="width: 2%;" th:if="${#bools.isFalse(show)}"></th>
 														<th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 10%;">Control ID</th>
 														<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 30%;">Control Name</th>
 														<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 58%;">Control Description</th>
@@ -130,21 +130,18 @@
 												</thead>
 												<tfoot>
 													<tr>
-														<th rowspan="1" colspan="1"></th>
+														<th rowspan="1" colspan="1" th:if="${#bools.isFalse(show)}"></th>
 														<th rowspan="1" colspan="1">Control ID</th>
 														<th rowspan="1" colspan="1">Control Name</th>
 														<th rowspan="1" colspan="1">Control Description</th>
 													</tr>
 												</tfoot>
 												<tbody>
-													<tr role="row" class="odd">
-														<td><input type="checkbox"></td>
-
-
-
-														<td class="sorting_1"><a href="#">Control_01</a></td>
-														<td>Mock Control 01</td>
-														<td>Mock Description of Control 01</td>
+													<tr role="row" class="odd" th:each="control, status : ${risk.controls}">
+														<td th:if="${#bools.isFalse(show)}"><input type="checkbox"><input type="hidden" th:attr="name='controls[__${status.index}__].guid'" th:value="${control.guid}" ></td>
+														<td class="sorting_1"><a href="#" th:text="${control.controlid}"></a></td>
+														<td th:text="${control.name}"></td>
+														<td th:text="${control.description}"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -156,20 +153,22 @@
 						</div>
 					</div>
 
-					<div id="tests" class="tab-pane fade" role="tabpanel">
+					<div id="regulations" class="tab-pane fade" role="tabpanel">
 						<h4>Tests Lorem ipsum dolor</h4>
 					</div>
 
 				</div>
+				<div th:replace="this :: assignControlModal"></div>
 			</div>
+			</form>
 
 		</div>
 	</div>
 
-	<div class="modal fade bd-example-modal-lg" id="assignControlModal" tabindex="-1" role="dialog" aria-labelledby="assignControlModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-lg" id="assignControlModal" tabindex="-1" role="dialog" aria-labelledby="assignControlModalLabel" aria-hidden="true" th:fragment="assignControlModal">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<form th:action="@{/risk/attachControl}" method="POST">
+<!-- 				<form th:action="@{/risk/attachControl}" method="POST" th:object="${risk}"> -->
 
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Control Assignment</h5>
@@ -194,8 +193,12 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr role="row" class="odd" th:each="control : ${controls}">
-												<td><input type="checkbox" id="guid" name="guid" th:value="${control.guid}"><input type="hidden" name="_guid" th:value="${control.guid}"> </td>
+											<tr role="row" class="odd" th:each="control, status : ${controls}">
+												<td>
+<!-- 													<input type="checkbox" th:field="*{controls}" th:value="${control.id}"> -->
+													<input type="checkbox" name="cguid" th:value="${control.guid}">
+<!-- 													<input type="hidden" th:attr="name='controls[__${status.index}__].guid'" th:value="${control.guid}"> -->
+												</td>
 												<td class="sorting_1" th:text="${control.controlid}"></td>
 												<td th:text="${control.name}"></td>
 												<td th:text="${control.description}"></td>
@@ -209,9 +212,9 @@
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" type="submit">Assign</button>
+						<button class="btn btn-primary" type="submit" name="action" value="assign">Assign</button>
 					</div>
-				</form>
+<!-- 				</form> -->
 			</div>
 		</div>
 	</div>
