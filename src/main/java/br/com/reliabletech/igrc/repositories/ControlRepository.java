@@ -8,6 +8,4 @@ public interface ControlRepository extends JpaRepository<Control, Long> {
 	
 	public Control findByGuid(String guid);
 
-	public Control findByGuid(String guid);
-	
 }
