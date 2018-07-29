@@ -18,7 +18,7 @@ public class RiskAssessmentPlan {
 	
 	@Lob
 	private String description;
-
+	
 	public String getName() {
 		return name;
 	}
@@ -42,4 +42,5 @@ public class RiskAssessmentPlan {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
+
 }

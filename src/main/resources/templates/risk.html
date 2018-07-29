@@ -140,7 +140,7 @@
 												<tbody>
 													<tr role="row" class="odd" th:each="control, status : ${risk.controls}">
 														<td th:if="${#bools.isFalse(show)}"><input type="checkbox"><input type="hidden" th:attr="name='controls[__${status.index}__].guid'" th:value="${control.guid}" ></td>
-														<td class="sorting_1"><a href="#" th:text="${control.controlid}"></a></td>
+														<td class="sorting_1"><a th:href="@{/control/show(guid=${control.guid})}" th:text="${control.controlid}"></a></td>
 														<td th:text="${control.name}"></td>
 														<td th:text="${control.description}"></td>
 													</tr>

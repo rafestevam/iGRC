@@ -3,6 +3,7 @@
 <head>
 <th:block th:include="fragments/iGRC.html :: headerfiles"></th:block>
 <title>iGRC :: Risk Assessment</title>
+
 </head>
 <body class="fixed-nav sticky-footer bg-dark">
 
@@ -58,6 +59,13 @@
 						  </select>
 						</div>
 						<div class="form-group">
+							<label for="date">Date</label>
+							<div class='input-group date' id='datetimepicker1'>
+			                    <input type='text' class="form-control" th:field="*{date}" />
+			                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                </div>
+						</div>
+						<div class="form-group">
 							<label for="obsOwner">Observation</label>
 							<textarea cols="20" th:field="*{obsOwner}" class="form-control"></textarea>	
 						</div>
@@ -80,6 +88,8 @@
 	<div th:replace="fragments/iGRC.html :: logoutModal"></div>
 
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap-datepicker-v1.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap-datepicker.pt-BR-v1.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
@@ -88,6 +98,18 @@
 <script th:src="@{/js/sb-admin.min.js}"></script>
 <script th:src="@{/js/sb-admin-datatables.min.js}"></script>
 <script th:src="@{/js/sb-admin-charts.min.js}"></script>
+
+<script type="text/javascript">
+	
+	$('.input-group.date').datepicker({
+    	format: 'dd/mm/yyyy',
+    	language: 'pt-BR',
+    	weekStart: 0,
+    	startDate:'0d',
+    	todayHighlight: true
+    });
+	
+</script>
 
 </body>
 </html>

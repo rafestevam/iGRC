@@ -1,6 +1,7 @@
 package br.com.reliabletech.igrc.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class RiskAssessment {
@@ -37,7 +40,10 @@ public class RiskAssessment {
 	@Lob
 	private String obsOwner;
 	
-	private String documents;	
+	private String documents;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private LocalDate date;
 	
 		
 	//@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -131,6 +137,14 @@ public class RiskAssessment {
 
 	public void setGuid(String guid) {
 		this.guid = guid;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 
