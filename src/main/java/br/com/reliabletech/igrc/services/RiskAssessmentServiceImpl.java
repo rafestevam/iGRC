@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.reliabletech.igrc.models.Issue;
 import br.com.reliabletech.igrc.models.RiskAssessment;
 import br.com.reliabletech.igrc.repositories.RiskAssessmentRepository;
 
