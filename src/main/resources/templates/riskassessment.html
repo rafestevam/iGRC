@@ -14,68 +14,79 @@
 		<div class="container-fluid">
 			
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Risk</li>
-				<li class="breadcrumb-item active">Risk Assessment</li>
+				<li class="breadcrumb-item">Risk Assessment</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Risk Assessment Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Risk Assessment Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">Assess New Risk</li>
+				
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/riskassessment/assess}" method="POST" th:object="${riskassessment}">
+			<form th:action="@{/riskassessment/save}" method="POST" th:object="${riskassessment}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
+							<label for="raID">ID</label>
+							<input type="text" th:field="*{raID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${riskassessment.guid}">
+						</div>
+						<div class="form-group">
 							<label for="name">Risk Assessment</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 						  <label for="qlPotDamage">Potential Qualitative Damage / Impact</label>
-						  <select class="form-control" th:field="*{qlPotDamage}">
+						  <select class="form-control" th:field="*{qlPotDamage}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						    <option th:each="qldamage : ${qldamages}" value="${qldamage.paramid}" th:utext="${qldamage.name}">
 						  </select>
 						</div>
 						<div class="form-group">
 						  <label for="qtPotDamage">Potential Quantitative Damage / Impact</label>
-						  <input type="number" min="0.00" max="1000000.00" step="0.01" th:field="*{qtPotDamage}" class="form-control">
+						  <input type="number" min="0.00" max="1000000.00" step="0.01" th:field="*{qtPotDamage}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 						  <label for="qlPotProbability">Potential Qualitative Probability</label>
-						  <select class="form-control" th:field="*{qlPotProbability}">
+						  <select class="form-control" th:field="*{qlPotProbability}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						    <option th:each="probab : ${probabs}" value="${probab.paramid}" th:utext="${probab.name}">
 						  </select>
 						</div>
 						<div class="form-group">
 						  <label for="qtPotOccFreq">Potential Quantitative Probability</label>
-						  <input type="number" min="0" max="100" step="1" th:field="*{qtPotOccFreq}" class="form-control">
+						  <input type="number" min="0" max="100" step="1" th:field="*{qtPotOccFreq}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 						  <label for="potTrend">Potential Trend</label>
-						  <select class="form-control" th:field="*{potTrend}">
+						  <select class="form-control" th:field="*{potTrend}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						    <option th:each="trendopt : ${trendopts}" value="${trendopt.paramid}" th:utext="${trendopt.name}">
 						  </select>
 						</div>
 						<div class="form-group">
 							<label for="date">Date</label>
-							<input type='date' class="form-control" th:field="*{date}" data-date-format="dd/MM/yyyy"/>
+							<input type='date' class="form-control" th:field="*{date}" data-date-format="dd/MM/yyyy" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"/>
 						</div>
 						<div class="form-group">
 							<label for="obsOwner">Observation</label>
-							<textarea cols="20" th:field="*{obsOwner}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{obsOwner}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="assess">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
 					</div>
-				
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Risk Assessment View</a>
+					</div>
 				</div>
 			</form>
 					

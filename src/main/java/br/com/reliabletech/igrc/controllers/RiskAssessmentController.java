@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.reliabletech.igrc.models.Parameter;
 import br.com.reliabletech.igrc.models.RiskAssessment;
@@ -24,7 +25,7 @@ public class RiskAssessmentController {
 	@Autowired
 	private ParameterService parameterService;
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="/assess", method=RequestMethod.GET)
 	public String riskassessmentForm(@ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
 
 		List<Parameter> qldamages = parameterService.findByParatype("qldamage");
@@ -36,18 +37,87 @@ public class RiskAssessmentController {
 		List<Parameter> probabs = parameterService.findByParatype("probab");
 		model.addAttribute("probabs", probabs);
 		
+		model.addAttribute("update", false);
+		model.addAttribute("show", false);
 		
 		return "riskassessment";
 	}
 	
-	@RequestMapping(value="/assess", method=RequestMethod.POST)
-	public String createRiskAssessment(@ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
+	@RequestMapping(value="/show", method=RequestMethod.GET)
+	public String showRiskAssessment(@RequestParam("guid") String guid, Model model) {
 		
-		riskassessmentService.save(riskassessment);
-		model.addAttribute("successMessage", "Risk Assessment saved sucessfully!");
+		RiskAssessment riskassessment = riskassessmentService.findByGuid(guid);
+		model.addAttribute("riskassessment", riskassessment);
+		model.addAttribute("update", false);
+		model.addAttribute("show", true);
 		
 		return "riskassessment";
 		
 	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=assess")
+	public String createRiskAssessment(RiskAssessment riskassessment, Model model){
+		
+		riskassessmentService.save(riskassessment);
+		model.addAttribute("successMessage", "Risk Assessment executed sucessfully!");
+		
+		return "redirect:view";
+		
+	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=update")
+	public String updateRiskAssessment(RiskAssessment riskassessment, Model model){
+		
+		riskassessmentService.save(riskassessment);
+		model.addAttribute("successMessage", "Risk Assessment updated sucessfully!");
+		
+		return "redirect:view";
+		
+	}
+	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String riskassessmentList(Model model){
+		
+		List<RiskAssessment> riskassessments = riskassessmentService.findAll();
+		model.addAttribute("riskassessments", riskassessments);
+		
+		return "riskassessmentview";
+		
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteRiskAssessment(@RequestParam("guid") String guid, Model model){
+		
+		RiskAssessment riskassessment = riskassessmentService.findByGuid(guid);
+		riskassessmentService.delete(riskassessment);
+		List<RiskAssessment> riskassessments = riskassessmentService.findAll();
+		model.addAttribute("riskassessments", riskassessments);
+		
+		return "riskassessmentlist";
+		
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String updateRiskAssessment(@RequestParam("guid") String guid, Model model){
+		
+		List<Parameter> qldamages = parameterService.findByParatype("qldamage");
+		model.addAttribute("qldamages", qldamages);
+
+		List<Parameter> trendopts = parameterService.findByParatype("trendopt");
+		model.addAttribute("trendopts", trendopts);
+
+		List<Parameter> probabs = parameterService.findByParatype("probab");
+		model.addAttribute("probabs", probabs);
+		
+		RiskAssessment riskassessment = riskassessmentService.findByGuid(guid);
+		model.addAttribute("riskassessment", riskassessment);
+		model.addAttribute("update", true);
+		
+		return "riskassessment";
+		
+	}
+	
+	
+	
 	
 }

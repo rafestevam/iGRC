@@ -6,4 +6,6 @@ import br.com.reliabletech.igrc.models.RiskAssessment;
 
 public interface RiskAssessmentRepository extends JpaRepository<RiskAssessment, Long> {
 
+	public RiskAssessment findByGuid(String guid);
+
 }

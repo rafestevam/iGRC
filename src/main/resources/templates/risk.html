@@ -67,7 +67,8 @@
 								</div>
 
 								<div class="form-group">
-									<label for="assessFreq">Assessment Frequency</label> <select class="form-control" th:field="*{assessFreq}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+									<label for="assessFreq">Assessment Frequency</label> 
+									<select class="form-control" th:field="*{assessFreq}" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 										<option th:each="stdFreq : ${stdFreqs}" value="${stdFreq.paramid}" th:utext="${stdFreq.name}">
 									</select>
 								</div>

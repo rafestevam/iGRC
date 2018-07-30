@@ -1,10 +1,12 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.reliabletech.igrc.models.Issue;
 import br.com.reliabletech.igrc.models.RiskAssessment;
 import br.com.reliabletech.igrc.repositories.RiskAssessmentRepository;
 
@@ -22,5 +24,18 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
 		}
 		riskassessmentRepository.save(riskassessment);
 	}
+	
+	public List<RiskAssessment> findAll() {
+		return riskassessmentRepository.findAll();
+	}
+
+	public RiskAssessment findByGuid(String guid) {
+		return riskassessmentRepository.findByGuid(guid);
+	}
+
+	public void delete(RiskAssessment riskassessment) {
+		riskassessmentRepository.delete(riskassessment);
+	}
+
 
 }

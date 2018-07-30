@@ -24,6 +24,8 @@ public class RiskAssessment {
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
 	private String guid;
+	
+	private String raID;
 
 	@NotNull
 	private String name;
@@ -149,6 +151,14 @@ public class RiskAssessment {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getRaID() {
+		return raID;
+	}
+
+	public void setRaID(String raID) {
+		this.raID = raID;
 	}
 
 
