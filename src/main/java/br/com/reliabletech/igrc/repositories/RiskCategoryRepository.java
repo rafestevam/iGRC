@@ -6,4 +6,6 @@ import br.com.reliabletech.igrc.models.RiskCategory;
 
 public interface RiskCategoryRepository extends JpaRepository<RiskCategory, Long> {
 
+	public RiskCategory findByGuid(String guid);
+
 }

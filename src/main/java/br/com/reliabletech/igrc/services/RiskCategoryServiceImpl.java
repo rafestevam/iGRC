@@ -1,6 +1,7 @@
 package br.com.reliabletech.igrc.services;
 
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,17 @@ public class RiskCategoryServiceImpl implements RiskCategoryService {
 		}
 		riskcategoryRepository.save(riskcategory);
 	}
+	
+	public List<RiskCategory> findAll() {
+		return riskcategoryRepository.findAll();
+	}
+
+	public RiskCategory findByGuid(String guid) {
+		return riskcategoryRepository.findByGuid(guid);
+	}
+
+	public void delete(RiskCategory riskcategory) {
+		riskcategoryRepository.delete(riskcategory);
+	}
+	
 }
