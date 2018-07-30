@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import br.com.reliabletech.igrc.components.FileSaver;
 import br.com.reliabletech.igrc.models.Parameter;
 import br.com.reliabletech.igrc.models.RiskAssessment;
 import br.com.reliabletech.igrc.services.ParameterService;
@@ -23,6 +26,9 @@ public class RiskAssessmentController {
 	
 	@Autowired
 	private ParameterService parameterService;
+	
+	@Autowired
+	private FileSaver fileSaver;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String riskassessmentForm(@ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
@@ -41,7 +47,11 @@ public class RiskAssessmentController {
 	}
 	
 	@RequestMapping(value="/assess", method=RequestMethod.POST)
-	public String createRiskAssessment(@ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
+	public String createRiskAssessment(@RequestParam MultipartFile document, @ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
+		
+		String path = fileSaver.write("ra-documents", document);
+		riskassessment.setDocuments(path);
+		System.out.println(path);
 		
 		riskassessmentService.save(riskassessment);
 		model.addAttribute("successMessage", "Risk Assessment saved sucessfully!");
