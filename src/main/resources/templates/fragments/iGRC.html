@@ -337,7 +337,40 @@
           </div>
         </div>
       </div>
-    </div>	
+    </div>
+    
+    <div class="modal fade" id="assignDocuments" tabindex="-1" role="dialog" aria-labelledby="assignDocumentsLabel" aria-hidden="true" th:fragment="assignDocuments(rootpath, objTitle)">
+    	<div class="modal-dialog" role="document" style="height:100%;">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<h5 class="modal-title" id="assignDocumentsLabel">Assign documents to <span th:text="${objTitle}"></span></h5>
+    				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+		            	<span aria-hidden="true">×</span>
+		            </button>
+    			</div>
+    			<div class="modal-body">
+    				<div class="container">
+						<div class="row">
+							<input type="hidden" name="count" value="1" />
+					        <div class="control-group" id="fields">
+					            <label class="control-label" for="field1">Attach documents to <span th:text="${objTitle}"></span></label>
+					            <div class="controls" id="profs"> 
+					                <form class="input-append">
+					                    <div id="field">
+<!-- 					                        <input autocomplete="off" class="input" id="field1" name="prof1" type="file" placeholder="Type something" data-items="8"/> -->
+					                        <input autocomplete="off" class="input" id="field1" name="file" type="file" placeholder="Type something" data-items="8"/>
+					                        <button id="b1" class="btn add-more" type="button">+</button></div>
+					                </form>
+					            <br>
+					            <small>Press + to attach another file</small>
+					            </div>
+					        </div>
+						</div>
+					</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
 	
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -347,6 +380,7 @@
 <script th:src="@{/js/sb-admin.min.js}"></script>
 <script th:src="@{/js/sb-admin-datatables.min.js}"></script>
 <script th:src="@{/js/sb-admin-charts.min.js}"></script>
+<script th:src="@{/js/attachDoc-modal.js}"></script>
 	
 </body>
 </html>

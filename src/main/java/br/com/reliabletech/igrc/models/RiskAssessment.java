@@ -1,8 +1,10 @@
 package br.com.reliabletech.igrc.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -45,7 +47,9 @@ public class RiskAssessment {
 	@Lob
 	private String obsOwner;
 	
-	private String documents;
+	//private String documents;
+	@ElementCollection
+	private List<File> files;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
@@ -94,14 +98,6 @@ public class RiskAssessment {
 
 	public void setQlPotDamage(String qlPotDamage) {
 		this.qlPotDamage = qlPotDamage;
-	}
-
-	public String getDocuments() {
-		return documents;
-	}
-
-	public void setDocuments(String documents) {
-		this.documents = documents;
 	}
 
 	public String getObsOwner() {
@@ -158,6 +154,14 @@ public class RiskAssessment {
 
 	public void setAssessDate(java.util.Date assessDate) {
 		this.assessDate = assessDate;
+	}
+
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
 	}
 	
 }

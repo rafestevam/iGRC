@@ -1,6 +1,8 @@
 package br.com.reliabletech.igrc.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import br.com.reliabletech.igrc.components.FileSaver;
+import br.com.reliabletech.igrc.models.File;
 import br.com.reliabletech.igrc.models.Parameter;
 import br.com.reliabletech.igrc.models.RiskAssessment;
 import br.com.reliabletech.igrc.services.ParameterService;
@@ -60,11 +64,17 @@ public class RiskAssessmentController {
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=assess")
-	public String createRiskAssessment(@RequestParam MultipartFile document, @ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
-	
-		String path = fileSaver.write("ra-documents", document);
-		riskassessment.setDocuments(path);
-		System.out.println(path);
+	public String createRiskAssessment(@RequestParam MultipartFile file[], @ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
+		
+		List<File> fileList = new ArrayList<>(); 		
+		Map<String, String> filesMap = fileSaver.write("ra-documents", file);
+		
+		filesMap.entrySet()
+			.stream()
+			.forEach(entry -> fileList.add(new File(entry.getKey(), entry.getValue())));
+		riskassessment.setFiles(fileList);
+//		riskassessment.setDocuments(path);
+//		System.out.println(path);
 		
 		riskassessmentService.save(riskassessment);
 		model.addAttribute("successMessage", "Risk Assessment executed sucessfully!");
