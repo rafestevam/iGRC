@@ -1,5 +1,6 @@
 package br.com.reliabletech.igrc.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,17 @@ public class ProcessServiceImpl implements ProcessService {
 		}
 		processRepository.save(process);
 	}
+	
+	public List<StruProcess> findAll() {
+		return processRepository.findAll();
+	}
 
+	public StruProcess findByGuid(String guid) {
+		return processRepository.findByGuid(guid);
+	}
+
+	public void delete(StruProcess process) {
+		processRepository.delete(process);
+	}
 
 }

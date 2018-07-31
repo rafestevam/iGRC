@@ -21,37 +21,47 @@ public class RiskCategory {
 	@Column(name="guid", length=100)
 	private String guid;
 
+	private String rcID;
+	
 	@NotNull
 	private String name;
 	
 	@Lob
 	private String description;
-	
-	private BigDecimal resQtPotDamage;
-	
-	private BigDecimal resQtNetDamage;
 
-	private String resQlPotDamage;
+	private String resQlPotDamage;		//Potential Qualitative  Damage / Impact
 	
-	private String resQlNetDamage;
+	private String resQlNetDamage;		//Net Qualitative  Damage / Impact
+
+	private BigDecimal resQtPotDamage;		//Potential Quantitative Potential Damage / Impact
 	
-	private Integer resQlPotOccFreq; //porcentagem numero
+	private BigDecimal resQtNetDamage;		//Net Quantitative Potential Damage / Impact
 	
-	private Integer resQtNetOccFreq; //porcentagem numero
+	private String resQlPotOccFreq;		//Potential Qualitative Occurrence Frequency
 	
-	private String resQlPotProbability;
+	private String resQlNetOccFreq;	//Net Qualitative Occurrence Frequency
 	
-	private String resQlNetProbability;
+	private Integer resQtPotProbability;		//Potential Quantitative Probability
 	
-	private String resQlPotTrend;
+	private Integer resQtNetProbability;		//Net Quantitative Probability
+
+	private String resQlPotTrend;		//Potential Trend
 	
-	private String resQlNetTrend;
+	private String resQlNetTrend;		//Net Trend
 	
 	private String documents;
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_categ_risk", joinColumns=@JoinColumn(name="RiskCategory_guid"), inverseJoinColumns=@JoinColumn(name="Risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
+
+	public String getGuid() {
+		return guid;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
 
 	public String getName() {
 		return name;
@@ -67,22 +77,6 @@ public class RiskCategory {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public BigDecimal getResQtPotDamage() {
-		return resQtPotDamage;
-	}
-
-	public void setResQtPotDamage(BigDecimal resQtPotDamage) {
-		this.resQtPotDamage = resQtPotDamage;
-	}
-
-	public BigDecimal getResQtNetDamage() {
-		return resQtNetDamage;
-	}
-
-	public void setResQtNetDamage(BigDecimal resQtNetDamage) {
-		this.resQtNetDamage = resQtNetDamage;
 	}
 
 	public String getResQlPotDamage() {
@@ -101,36 +95,52 @@ public class RiskCategory {
 		this.resQlNetDamage = resQlNetDamage;
 	}
 
-	public Integer getResQlPotOccFreq() {
+	public BigDecimal getResQtPotDamage() {
+		return resQtPotDamage;
+	}
+
+	public void setResQtPotDamage(BigDecimal resQtPotDamage) {
+		this.resQtPotDamage = resQtPotDamage;
+	}
+
+	public BigDecimal getResQtNetDamage() {
+		return resQtNetDamage;
+	}
+
+	public void setResQtNetDamage(BigDecimal resQtNetDamage) {
+		this.resQtNetDamage = resQtNetDamage;
+	}
+
+	public String getResQlPotOccFreq() {
 		return resQlPotOccFreq;
 	}
 
-	public void setResQlPotOccFreq(Integer resQlPotOccFreq) {
+	public void setResQlPotOccFreq(String resQlPotOccFreq) {
 		this.resQlPotOccFreq = resQlPotOccFreq;
 	}
 
-	public Integer getResQtNetOccFreq() {
-		return resQtNetOccFreq;
+	public String getResQlNetOccFreq() {
+		return resQlNetOccFreq;
 	}
 
-	public void setResQtNetOccFreq(Integer resQtNetOccFreq) {
-		this.resQtNetOccFreq = resQtNetOccFreq;
+	public void setResQlNetOccFreq(String resQlNetOccFreq) {
+		this.resQlNetOccFreq = resQlNetOccFreq;
 	}
 
-	public String getResQlPotProbability() {
-		return resQlPotProbability;
+	public Integer getResQtPotProbability() {
+		return resQtPotProbability;
 	}
 
-	public void setResQlPotProbability(String resQlPotProbability) {
-		this.resQlPotProbability = resQlPotProbability;
+	public void setResQtPotProbability(Integer resQtPotProbability) {
+		this.resQtPotProbability = resQtPotProbability;
 	}
 
-	public String getResQlNetProbability() {
-		return resQlNetProbability;
+	public Integer getResQtNetProbability() {
+		return resQtNetProbability;
 	}
 
-	public void setResQlNetProbability(String resQlNetProbability) {
-		this.resQlNetProbability = resQlNetProbability;
+	public void setResQtNetProbability(Integer resQtNetProbability) {
+		this.resQtNetProbability = resQtNetProbability;
 	}
 
 	public String getResQlPotTrend() {
@@ -165,12 +175,14 @@ public class RiskCategory {
 		this.risks = risks;
 	}
 
-	public String getGuid() {
-		return guid;
+	public String getRcID() {
+		return rcID;
 	}
 
-	public void setGuid(String guid) {
-		this.guid = guid;
+	public void setRcID(String rcID) {
+		this.rcID = rcID;
 	}
 
+	
+	
 }

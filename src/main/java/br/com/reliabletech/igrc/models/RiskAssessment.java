@@ -1,7 +1,6 @@
 package br.com.reliabletech.igrc.models;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +23,8 @@ public class RiskAssessment {
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
 	private String guid;
+	
+	private String raID;
 
 	@NotNull
 	private String name;
@@ -48,7 +49,7 @@ public class RiskAssessment {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date date;
+	private java.util.Date assessDate;
 		
 	//@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -143,13 +144,20 @@ public class RiskAssessment {
 		this.guid = guid;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getRaID() {
+		return raID;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRaID(String raID) {
+		this.raID = raID;
 	}
 
+	public java.util.Date getAssessDate() {
+		return assessDate;
+	}
 
+	public void setAssessDate(java.util.Date assessDate) {
+		this.assessDate = assessDate;
+	}
+	
 }
