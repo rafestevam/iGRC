@@ -2,59 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:include="fragments/iGRC.html :: headerfiles"></th:block>
-<title>iGRC :: Process</title>
+<title>iGRC :: Processes</title>
 </head>
 <body class="fixed-nav sticky-footer bg-dark">
 
 	<nav th:replace="fragments/iGRC.html :: mainNav"></nav>
-	
-	
 	<div class="content-wrapper">
 		<div class="container-fluid">
-			
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">Process</li>
-				<li class="breadcrumb-item active">New Process</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(show)}">Process Show</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isTrue(update)}">Process Update</li>
+				<li class="breadcrumb-item active" th:if="${#bools.isFalse(show) && #bools.isFalse(update)}">New Process</li>
 			</ol>
 			
 			<div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 			
-			<form th:action="@{/process/create}" method="POST" th:object="${process}">
+			<form th:action="@{/process/save}" method="POST" th:object="${process}">
 				<div class="card mb-3">
 					<div class="card-header">Basic Data</div>
 					<div class="card-body">
 						<div class="form-group">
 							<label for="processID">Process ID</label>
-							<input type="text" th:field="*{processID}" class="form-control">
+							<input type="text" th:field="*{processID}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
+							<input type="hidden" th:attr="name='guid'" th:value="${process.guid}">
 						</div>
 					<div class="form-group">
 							<label for="name">Name</label>
-							<input type="text" th:field="*{name}" class="form-control">
+							<input type="text" th:field="*{name}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea cols="20" th:field="*{description}" class="form-control"></textarea>	
+							<textarea cols="20" th:field="*{description}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
 						<div class="form-group">
 							<label for="mainProcess">Main Process</label>
-							<input type="text" th:field="*{mainProcess}" class="form-control">
+							<input type="text" th:field="*{mainProcess}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="subProcess">Sub Process</label>
-							<input type="text" th:field="*{subProcess}" class="form-control">
+							<input type="text" th:field="*{subProcess}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="owner">Process Owner</label>
-							<input type="text" th:field="*{owner}" class="form-control">
+							<input type="text" th:field="*{owner}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>
 						<div class="form-group">
 							<label for="documents">Documents</label>
-							<input type="text" th:field="*{documents}" class="form-control">
+							<input type="text" th:field="*{documents}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}">
 						</div>					
 					</div>
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Save Data</button>
-						<a class="btn btn-danger" href="#">Cancel</a>
+					<div class="card-footer" th:if="${#bools.isFalse(show)}">
+						<button type="submit" th:if="${#bools.isFalse(update)}" class="btn btn-primary" name="action" value="create">Save Data</button>
+						<button type="submit" th:if="${#bools.isTrue(update)}" class="btn btn-primary" name="action" value="update">Save Data</button>
+						<a class="btn btn-danger" href="#" onClick="window.history.go(-1)">Cancel</a>
+					</div>
+					<div class="card-footer" th:if="${#bools.isTrue(show)}">
+						<a class="btn btn-primary" href="#" onClick="window.history.go(-1)">Back to Process View</a>
 					</div>
 				
 				</div>
