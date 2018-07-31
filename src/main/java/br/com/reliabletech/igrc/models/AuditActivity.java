@@ -1,21 +1,19 @@
 package br.com.reliabletech.igrc.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class AuditPlan {
+public class AuditActivity {
 
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
@@ -29,10 +27,11 @@ public class AuditPlan {
 	@Lob
 	private String description;
 	
-	@Lob
-	private String objective;
+	private String auditPlan;
 	
-	private String auditType;
+	private String auditScope;
+	
+	private String subActivities;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
@@ -42,20 +41,28 @@ public class AuditPlan {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date plannedEndDate;
 
-	private String plannedAuditPeriod;
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date actualStartDate;
 	
-	private String actualAuditPeriod;
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private java.util.Date actualEndDate;
+
+	private String plannedAcvityPeriod;
+	
+	private String actualAcvityPeriod;
 	
 	private String endDateStatus;
-	
-	private String auditTeam;
 	
 	private String responsible;
 	
 	private String documents;
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	private List<AuditActivity> auditactivities = new ArrayList<AuditActivity>();
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="auditplan_guid")
+	private AuditPlan auditplan;
 
 	public String getName() {
 		return name;
@@ -89,14 +96,6 @@ public class AuditPlan {
 		this.auditID = auditID;
 	}
 
-	public String getObjetive() {
-		return objective;
-	}
-
-	public void setObjetive(String objetive) {
-		this.objective = objetive;
-	}
-
 	public java.util.Date getPlannedStartDate() {
 		return plannedStartDate;
 	}
@@ -111,22 +110,6 @@ public class AuditPlan {
 
 	public void setPlannedEndDate(java.util.Date plannedEndDate) {
 		this.plannedEndDate = plannedEndDate;
-	}
-
-	public String getPlannedAuditPeriod() {
-		return plannedAuditPeriod;
-	}
-
-	public void setPlannedAuditPeriod(String plannedAuditPeriod) {
-		this.plannedAuditPeriod = plannedAuditPeriod;
-	}
-
-	public String getActualAuditPeriod() {
-		return actualAuditPeriod;
-	}
-
-	public void setActualAuditPeriod(String actualAuditPeriod) {
-		this.actualAuditPeriod = actualAuditPeriod;
 	}
 
 	public String getEndDateStatus() {
@@ -145,14 +128,6 @@ public class AuditPlan {
 		this.documents = documents;
 	}
 
-	public String getAuditTeam() {
-		return auditTeam;
-	}
-
-	public void setAuditTeam(String auditTeam) {
-		this.auditTeam = auditTeam;
-	}
-
 	public String getResponsible() {
 		return responsible;
 	}
@@ -161,28 +136,69 @@ public class AuditPlan {
 		this.responsible = responsible;
 	}
 
-	public String getObjective() {
-		return objective;
+	public String getAuditPlan() {
+		return auditPlan;
 	}
 
-	public void setObjective(String objective) {
-		this.objective = objective;
+	public void setAuditPlan(String auditPlan) {
+		this.auditPlan = auditPlan;
 	}
 
-	public List<AuditActivity> getAuditactivities() {
-		return auditactivities;
+	public String getAuditScope() {
+		return auditScope;
 	}
 
-	public void setAuditactivities(List<AuditActivity> auditactivities) {
-		this.auditactivities = auditactivities;
+	public void setAuditScope(String auditScope) {
+		this.auditScope = auditScope;
 	}
 
-	public String getAuditType() {
-		return auditType;
+	public String getSubActivities() {
+		return subActivities;
 	}
 
-	public void setAuditType(String auditType) {
-		this.auditType = auditType;
+	public void setSubActivities(String subActivities) {
+		this.subActivities = subActivities;
 	}
 
+	public java.util.Date getActualStartDate() {
+		return actualStartDate;
+	}
+
+	public void setActualStartDate(java.util.Date actualStartDate) {
+		this.actualStartDate = actualStartDate;
+	}
+
+	public java.util.Date getActualEndDate() {
+		return actualEndDate;
+	}
+
+	public void setActualEndDate(java.util.Date actualEndDate) {
+		this.actualEndDate = actualEndDate;
+	}
+
+	public String getPlannedAcvityPeriod() {
+		return plannedAcvityPeriod;
+	}
+
+	public void setPlannedAcvityPeriod(String plannedAcvityPeriod) {
+		this.plannedAcvityPeriod = plannedAcvityPeriod;
+	}
+
+	public String getActualAcvityPeriod() {
+		return actualAcvityPeriod;
+	}
+
+	public void setActualAcvityPeriod(String actualAcvityPeriod) {
+		this.actualAcvityPeriod = actualAcvityPeriod;
+	}
+
+	public AuditPlan getAuditplan() {
+		return auditplan;
+	}
+
+	public void setAuditplan(AuditPlan auditplan) {
+		this.auditplan = auditplan;
+	}
+
+	
 }

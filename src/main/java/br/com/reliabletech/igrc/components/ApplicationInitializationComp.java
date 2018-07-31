@@ -536,6 +536,62 @@ public class ApplicationInitializationComp {
 			parameter51.setLanguage("EN");
 			parameterService.save(parameter51);
 			
+			Parameter parameter52 = new Parameter();	
+			parameter52.setParatype("audittype");
+			parameter52.setParamid("audittype00");
+			parameter52.setName("--- Unspecified");
+			parameter52.setDescription("Empty value");
+			parameter52.setKind("Combo value");
+			parameter52.setVisible(true);
+			parameter52.setEnabled(true);
+			parameter52.setLanguage("EN");
+			parameterService.save(parameter52);
+			
+			Parameter parameter53 = new Parameter();	
+			parameter53.setParatype("audittype");
+			parameter53.setParamid("audittype01");
+			parameter53.setName("ISO");
+			parameter53.setDescription("");
+			parameter53.setKind("Combo value");
+			parameter53.setVisible(true);
+			parameter53.setEnabled(true);
+			parameter53.setLanguage("EN");
+			parameterService.save(parameter53);
+			
+			Parameter parameter54 = new Parameter();	
+			parameter54.setParatype("audittype");
+			parameter54.setParamid("audittype02");
+			parameter54.setName("SOX");
+			parameter54.setDescription("");
+			parameter54.setKind("Combo value");
+			parameter54.setVisible(true);
+			parameter54.setEnabled(true);
+			parameter54.setLanguage("EN");
+			parameterService.save(parameter54);
+
+			Parameter parameter55 = new Parameter();	
+			parameter55.setParatype("audittype");
+			parameter55.setParamid("audittype03");
+			parameter55.setName("Compliance Iniciative");
+			parameter55.setDescription("");
+			parameter55.setKind("Combo value");
+			parameter55.setVisible(true);
+			parameter55.setEnabled(true);
+			parameter55.setLanguage("EN");
+			parameterService.save(parameter55);
+
+			Parameter parameter56 = new Parameter();	
+			parameter56.setParatype("audittype");
+			parameter56.setParamid("audittype04");
+			parameter56.setName("Process Change Triggered");
+			parameter56.setDescription("");
+			parameter56.setKind("Combo value");
+			parameter56.setVisible(true);
+			parameter56.setEnabled(true);
+			parameter56.setLanguage("EN");
+			parameterService.save(parameter56);
+			
+			
 			
 			//Não edite este bloco!
 			Parameter parameterz = new Parameter();		
@@ -548,7 +604,6 @@ public class ApplicationInitializationComp {
 			parameterz.setLanguage("EN");
 			parameterz.setKind("System Check");
 			parameterService.save(parameterz);
-			
 			
 		}
 		
