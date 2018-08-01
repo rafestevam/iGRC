@@ -53,6 +53,8 @@ public class AuditActivity {
 	
 	private String actualAcvityPeriod;
 	
+	private String status;
+	
 	private String endDateStatus;
 	
 	private String responsible;
@@ -198,6 +200,14 @@ public class AuditActivity {
 
 	public void setAuditplan(AuditPlan auditplan) {
 		this.auditplan = auditplan;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	
