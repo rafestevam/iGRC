@@ -32,6 +32,13 @@ public class Parameter {
 
 	private String language = "EN";
 
+	public Parameter() {
+	}
+	
+	public Parameter(String key) {
+		setParatype(key);
+	}
+
 	public String getKind() {
 		return kind;
 	}
@@ -103,5 +110,39 @@ public class Parameter {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
+
+	public void setParamValues(ParameterEnum key, Object value) {
+		
+		switch (key) {
+		case DESCRIPTION:
+			setDescription((String) value);
+			break;
+		case ENABLED:
+			setEnabled((Boolean) value);
+			break;
+		case KIND:
+			setKind((String) value);
+			break;
+		case LANGUAGE:
+			setLanguage((String) value);
+			break;
+		case NAME:
+			setName((String) value);
+			break;
+		case PARAMID:
+			setParamid((String) value);
+			break;
+		case VISIBLE:
+			setVisible((Boolean) value);
+			break;
+		}
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Parameter [paramid=" + paramid + ", name=" + name + ", description=" + description + ", paratype=" + paratype + ", kind=" + kind + ", visible=" + visible + ", enabled=" + enabled + ", language=" + language + "]";
+	}
+
 
 }
