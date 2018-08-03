@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Parameter {
 
-	@Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="guid", length=100)
+	@Id // @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "guid", length = 100)
 	private String guid;
 
 	@NotNull
@@ -141,8 +141,9 @@ public class Parameter {
 
 	@Override
 	public String toString() {
-		return "Parameter [paramid=" + paramid + ", name=" + name + ", description=" + description + ", paratype=" + paratype + ", kind=" + kind + ", visible=" + visible + ", enabled=" + enabled + ", language=" + language + "]";
+		return "Parameter [paramid=" + paramid + ", name=" + name + ", description=" + description + ", paratype="
+				+ paratype + ", kind=" + kind + ", visible=" + visible + ", enabled=" + enabled + ", language="
+				+ language + "]";
 	}
-
 
 }
