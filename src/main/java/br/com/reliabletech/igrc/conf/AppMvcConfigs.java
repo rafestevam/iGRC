@@ -8,6 +8,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import br.com.reliabletech.igrc.converters.DateToStringConverter;
 import br.com.reliabletech.igrc.converters.StringToDateConverter;
 
 @Configuration
@@ -20,6 +21,7 @@ public class AppMvcConfigs implements WebMvcConfigurer{
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new StringToDateConverter());
+		registry.addConverter(new DateToStringConverter());
 	}
 	
 	@Bean

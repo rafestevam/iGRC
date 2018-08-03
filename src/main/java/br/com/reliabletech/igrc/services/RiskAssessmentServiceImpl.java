@@ -20,6 +20,11 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
 		if(riskassessment.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			riskassessment.setGuid(guid);
+		}else {
+			if(riskassessment.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				riskassessment.setGuid(guid);
+			}
 		}
 		riskassessmentRepository.save(riskassessment);
 	}

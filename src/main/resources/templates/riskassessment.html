@@ -73,11 +73,27 @@
 							<label for="obsOwner">Observation</label>
 							<textarea cols="20" th:field="*{obsOwner}" class="form-control" th:readonly="${#bools.isTrue(show) ? 'readonly' : 'false'}"></textarea>	
 						</div>
-						<div class="form-group">
-							<a href="#" data-toggle="modal" data-target="#assignDocuments">Documents</a>
+						<div class="form-group" th:if="${#bools.isFalse(show)}">
+							<a href="#" data-toggle="modal" data-target="#assignDocuments" >Attach Documents</a>
 <!-- 							<label for="documents">Documents</label> -->
 <!-- 							<input type="file" name="document" class="form-control"> -->
 <!-- 							<input type="text" th:field="*{documents}" class="form-control"> -->
+						</div>
+						<div class="form-group" th:if="${#bools.isTrue(show) || #bools.isTrue(update)}">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col" style="width:80%">Documents Attached</th>
+										<th scope="col" style="width:20%"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="file : *{files}">
+										<td><span th:text="${file.name}"></span></td>
+										<td><i class="fas fa-download"></i></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div class="card-footer" th:if="${#bools.isFalse(show)}">

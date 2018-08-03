@@ -67,7 +67,7 @@ public class RiskAssessmentController {
 	public String createRiskAssessment(@RequestParam MultipartFile file[], @ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
 		
 		List<File> fileList = new ArrayList<>(); 		
-		Map<String, String> filesMap = fileSaver.write("ra-documents", file);
+		Map<String, String> filesMap = fileSaver.write("ra-documents", file, riskassessment.getRaID());
 		
 		filesMap.entrySet()
 			.stream()

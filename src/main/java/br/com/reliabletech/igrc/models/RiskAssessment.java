@@ -1,6 +1,7 @@
 package br.com.reliabletech.igrc.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -49,7 +50,7 @@ public class RiskAssessment {
 	
 	//private String documents;
 	@ElementCollection
-	private List<File> files;
+	private List<File> files = new ArrayList<File>();
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
