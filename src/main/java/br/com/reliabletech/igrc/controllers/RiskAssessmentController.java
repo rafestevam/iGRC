@@ -73,8 +73,6 @@ public class RiskAssessmentController {
 			.stream()
 			.forEach(entry -> fileList.add(new File(entry.getKey(), entry.getValue())));
 		riskassessment.setFiles(fileList);
-//		riskassessment.setDocuments(path);
-//		System.out.println(path);
 		
 		riskassessmentService.save(riskassessment);
 		model.addAttribute("successMessage", "Risk Assessment executed sucessfully!");
