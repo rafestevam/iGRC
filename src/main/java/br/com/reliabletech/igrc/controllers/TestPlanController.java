@@ -32,7 +32,6 @@ public class TestPlanController {
 		model.addAttribute("defenseLines", defenseLines);
 		model.addAttribute("update", false);
 		model.addAttribute("show", false);
-
 		
 		return "testplan";
 	}
@@ -53,7 +52,7 @@ public class TestPlanController {
 	public String createTestPlan(TestPlan testplan, Model model){
 		
 		testplanService.save(testplan);
-		model.addAttribute("successMessage", "Action Plan created sucessfully!");
+		model.addAttribute("successMessage", "Test Plan created sucessfully!");
 		
 		return "redirect:view";
 		
@@ -63,7 +62,7 @@ public class TestPlanController {
 	public String updateTestPlan(TestPlan testplan, Model model){
 		
 		testplanService.save(testplan);
-		model.addAttribute("successMessage", "Action Plan updated sucessfully!");
+		model.addAttribute("successMessage", "Test Plan updated sucessfully!");
 		
 		return "redirect:view";
 		
