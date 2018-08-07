@@ -1,9 +1,16 @@
 package br.com.reliabletech.igrc.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -32,6 +39,34 @@ public class AppSystem {
 	private String status;
 
 	private String documents;
+	
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_system_risk", joinColumns=@JoinColumn(name="appsystem_guid"), inverseJoinColumns=@JoinColumn(name="risk_guid"))
+	private List<Risk> risks = new ArrayList<Risk>();
+
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_system_control", joinColumns=@JoinColumn(name="appsystem_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
+	private List<Control> controls = new ArrayList<Control>();
+
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_system_reg", joinColumns=@JoinColumn(name="appsystem_guid"), inverseJoinColumns=@JoinColumn(name="regulation_guid"))
+	private List<Regulation> regulations = new ArrayList<Regulation>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_system_process", joinColumns=@JoinColumn(name="appsystem_guid"), inverseJoinColumns=@JoinColumn(name="process_guid"))
+	private List<Process> processes = new ArrayList<Process>();
+	
+	
+	@ManyToMany(mappedBy="appsystems")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
+	
+	@ManyToMany(mappedBy="appsystems")
+	private List<FinancialAccount> financeaccounts = new ArrayList<FinancialAccount>();
+	
+	@ManyToMany(mappedBy="appsystems")
+	private List<Product> products = new ArrayList<Product>();
+	
 	
 	public String getName() {
 		return name;
@@ -112,6 +147,63 @@ public class AppSystem {
 	public void setDocuments(String documents) {
 		this.documents = documents;
 	}
+
+	public List<Risk> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(List<Risk> risks) {
+		this.risks = risks;
+	}
+
+	public List<Control> getControls() {
+		return controls;
+	}
+
+	public void setControls(List<Control> controls) {
+		this.controls = controls;
+	}
+
+	public List<Regulation> getRegulations() {
+		return regulations;
+	}
+
+	public void setRegulations(List<Regulation> regulations) {
+		this.regulations = regulations;
+	}
+
+	public List<Process> getProcesses() {
+		return processes;
+	}
+
+	public void setProcesses(List<Process> processes) {
+		this.processes = processes;
+	}
+
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
+	}
+
+	public List<FinancialAccount> getFinanceaccounts() {
+		return financeaccounts;
+	}
+
+	public void setFinanceaccounts(List<FinancialAccount> financeaccounts) {
+		this.financeaccounts = financeaccounts;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
 	
 	
 }

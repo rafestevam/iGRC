@@ -1,9 +1,16 @@
 package br.com.reliabletech.igrc.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,6 +35,35 @@ public class FinancialAccount {
 	private String costCenter;
 	
 	private String documents;
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_risk", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="risk_guid"))
+	private List<Risk> risks = new ArrayList<Risk>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_control", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
+	private List<Control> controls = new ArrayList<Control>();
+
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_reg", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="regulation_guid"))
+	private List<Regulation> regulations = new ArrayList<Regulation>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_process", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="process_guid"))
+	private List<Process> processes = new ArrayList<Process>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_appsys", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="appsystem_guid"))
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_finacc_product", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="product_guid"))
+	private List<Product> products = new ArrayList<Product>();
+	
+	
+	@ManyToMany(mappedBy="financeaccounts")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
+	
 	
 	public String getName() {
 		return name;
@@ -91,6 +127,62 @@ public class FinancialAccount {
 
 	public void setSignoff(Boolean signoff) {
 		this.signoff = signoff;
+	}
+
+	public List<Risk> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(List<Risk> risks) {
+		this.risks = risks;
+	}
+
+	public List<Control> getControls() {
+		return controls;
+	}
+
+	public void setControls(List<Control> controls) {
+		this.controls = controls;
+	}
+
+	public List<Regulation> getRegulations() {
+		return regulations;
+	}
+
+	public void setRegulations(List<Regulation> regulations) {
+		this.regulations = regulations;
+	}
+
+	public List<Process> getProcesses() {
+		return processes;
+	}
+
+	public void setProcesses(List<Process> processes) {
+		this.processes = processes;
+	}
+
+	public List<AppSystem> getAppsystems() {
+		return appsystems;
+	}
+
+	public void setAppsystems(List<AppSystem> appsystems) {
+		this.appsystems = appsystems;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
 	}
 	
 	
