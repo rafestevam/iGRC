@@ -1,9 +1,13 @@
 package br.com.reliabletech.igrc.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,7 +32,29 @@ public class ProcessStru {
 	
 	private String owner;		
 	
-	private String documents;		
+	private String documents;
+	
+	@ManyToMany(mappedBy="processes")
+	private List<Risk> risks = new ArrayList<Risk>();
+	
+	@ManyToMany(mappedBy="processes")
+	private List<Control> controls = new ArrayList<Control>();
+	
+	@ManyToMany(mappedBy="processes")
+	private List<Regulation> regulations = new ArrayList<Regulation>();
+
+	@ManyToMany(mappedBy="processes")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
+	
+	@ManyToMany(mappedBy="processes")
+	private List<FinancialAccount> financeaccounts = new ArrayList<FinancialAccount>();
+	
+	@ManyToMany(mappedBy="processes")
+	private List<Product> products = new ArrayList<Product>();
+
+	@ManyToMany(mappedBy="processes")
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();	
+	
 	
 	public String getName() {
 		return name;
@@ -93,5 +119,63 @@ public class ProcessStru {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
+
+	public List<Risk> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(List<Risk> risks) {
+		this.risks = risks;
+	}
+
+	public List<Control> getControls() {
+		return controls;
+	}
+
+	public void setControls(List<Control> controls) {
+		this.controls = controls;
+	}
+
+	public List<Regulation> getRegulations() {
+		return regulations;
+	}
+
+	public void setRegulations(List<Regulation> regulations) {
+		this.regulations = regulations;
+	}
+
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
+	}
+
+	public List<FinancialAccount> getFinanceaccounts() {
+		return financeaccounts;
+	}
+
+	public void setFinanceaccounts(List<FinancialAccount> financeaccounts) {
+		this.financeaccounts = financeaccounts;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<AppSystem> getAppsystems() {
+		return appsystems;
+	}
+
+	public void setAppsystems(List<AppSystem> appsystems) {
+		this.appsystems = appsystems;
+	}
+	
+	
 	
 }

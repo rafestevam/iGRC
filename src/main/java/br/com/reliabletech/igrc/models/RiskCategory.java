@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -52,7 +50,6 @@ public class RiskCategory {
 	private String documents;
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="jt_categ_risk", joinColumns=@JoinColumn(name="RiskCategory_guid"), inverseJoinColumns=@JoinColumn(name="Risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
 
 	public String getGuid() {

@@ -20,7 +20,7 @@ public class Control {
 	private String guid;
 	
 	@NotNull
-	private String controlid;
+	private String controlID;
 	
 	@NotNull
 	private String name;
@@ -49,17 +49,15 @@ public class Control {
 	private String ctrlenvmt;
 	
 	private String documents;
+
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	//@JoinTable(name="jt_control_issue", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	//@JoinTable(name="jt_control_control_assess", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="ControlAssessment_guid"))
 	private List<ControlAssessment> controlassessment = new ArrayList<ControlAssessment>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	//@JoinTable(name="jt_control_test", joinColumns=@JoinColumn(name="control_guid"), inverseJoinColumns=@JoinColumn(name="Test_guid"))
 	private List<Test> tests = new ArrayList<Test>();
 
 	@ManyToMany(mappedBy="controls")
@@ -67,8 +65,18 @@ public class Control {
 	
 	@ManyToMany(mappedBy="controls")
 	private List<Regulation> regulations = new ArrayList<Regulation>();
+
+	@ManyToMany(mappedBy="controls")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
 	
-	private Boolean assigned;
+	@ManyToMany(mappedBy="controls")
+	private List<FinancialAccount> financeaccounts = new ArrayList<FinancialAccount>();
+	
+	@ManyToMany(mappedBy="controls")
+	private List<Product> products = new ArrayList<Product>();
+	
+	@ManyToMany(mappedBy="controls")
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();	
 	
 	public Control() {
 	}
@@ -78,11 +86,11 @@ public class Control {
 	}
 
 	public String getControlid() {
-		return controlid;
+		return controlID;
 	}
 	
 	public void setControlid(String controlid) {
-		this.controlid = controlid;
+		this.controlID = controlid;
 	}
 	
 	public boolean isKeyctrl() {
@@ -190,11 +198,11 @@ public class Control {
 	}
 
 	public String getControl_id() {
-		return controlid;
+		return controlID;
 	}
 
 	public void setControl_id(String control_id) {
-		this.controlid = control_id;
+		this.controlID = control_id;
 	}
 
 	public String getCtrltype() {
@@ -237,12 +245,53 @@ public class Control {
 		this.guid = guid;
 	}
 
-	public boolean isAssigned() {
-		return assigned;
+	public List<Regulation> getRegulations() {
+		return regulations;
 	}
 
-	public void setAssigned(boolean assigned) {
-		this.assigned = assigned;
+	public void setRegulations(List<Regulation> regulations) {
+		this.regulations = regulations;
 	}
+
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
+	}
+
+	public List<FinancialAccount> getFinanceaccounts() {
+		return financeaccounts;
+	}
+
+	public void setFinanceaccounts(List<FinancialAccount> financeaccounts) {
+		this.financeaccounts = financeaccounts;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<AppSystem> getAppsystems() {
+		return appsystems;
+	}
+
+	public void setAppsystems(List<AppSystem> appsystems) {
+		this.appsystems = appsystems;
+	}
+
+	public String getControlID() {
+		return controlID;
+	}
+
+	public void setControlID(String controlID) {
+		this.controlID = controlID;
+	}
+
 	
 }

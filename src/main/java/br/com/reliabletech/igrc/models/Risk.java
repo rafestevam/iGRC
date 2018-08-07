@@ -30,7 +30,7 @@ public class Risk {
 	private String description;
 	
 	@NotNull
-	private String riskid;
+	private String riskID;
 	
 	@Lob
 	private String cause;
@@ -78,18 +78,30 @@ public class Risk {
 	private List<Control> controls = new ArrayList<Control>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	//@JoinTable(name="jt_risk_issue", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="issue_guid"))
 	private List<Issue> issues = new ArrayList<Issue>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
-	//@JoinTable(name="jt_risk_risk_assess", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="RiskAssessment_guid"))
 	private List<RiskAssessment> riskassessments = new ArrayList<RiskAssessment>();
+	
+	@ManyToOne(targetEntity = RiskCategory.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	private RiskCategory riskcategory;
+
 	
 	@ManyToMany(mappedBy="risks")
 	private List<Regulation> regulations = new ArrayList<Regulation>();
 	
-	@ManyToOne(targetEntity = RiskCategory.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	private RiskCategory riskcategory;
+	@ManyToMany(mappedBy="risks")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
+
+	@ManyToMany(mappedBy="risks")
+	private List<FinancialAccount> financeaccounts = new ArrayList<FinancialAccount>();
+	
+	@ManyToMany(mappedBy="risks")
+	private List<Product> products = new ArrayList<Product>();
+	
+	@ManyToMany(mappedBy="risks")
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();
+	
 	
 	public List<RiskAssessment> getRiskassessments() {
 		return riskassessments;
@@ -105,10 +117,10 @@ public class Risk {
 	}
 
 	public String getRiskid() {
-		return riskid;
+		return riskID;
 	}
 	public void setRiskid(String riskid) {
-		this.riskid = riskid;
+		this.riskID = riskid;
 	}
 	public String getProcess() {
 		return process;
@@ -154,10 +166,10 @@ public class Risk {
 		this.consequence = consequence;
 	}
 	public String getRisk_id() {
-		return riskid;
+		return riskID;
 	}
 	public void setRisk_id(String risk_id) {
-		this.riskid = risk_id;
+		this.riskID = risk_id;
 	}
 	public List<Control> getControls() {
 		return controls;
@@ -299,5 +311,36 @@ public class Risk {
 	public void setRiskcategory(RiskCategory riskcategory) {
 		this.riskcategory = riskcategory;
 	}
+	public String getRiskID() {
+		return riskID;
+	}
+	public void setRiskID(String riskID) {
+		this.riskID = riskID;
+	}
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
+	}
+	public List<FinancialAccount> getFinanceaccounts() {
+		return financeaccounts;
+	}
+	public void setFinanceaccounts(List<FinancialAccount> financeaccounts) {
+		this.financeaccounts = financeaccounts;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	public List<AppSystem> getAppsystems() {
+		return appsystems;
+	}
+	public void setAppsystems(List<AppSystem> appsystems) {
+		this.appsystems = appsystems;
+	}
+
 	
 }

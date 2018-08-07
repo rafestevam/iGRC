@@ -56,6 +56,20 @@ public class Regulation {
 	@JoinTable(name="jt_reg_control", joinColumns=@JoinColumn(name="regulation_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
 
+	
+	@ManyToMany(mappedBy="regulations")
+	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
+	
+	@ManyToMany(mappedBy="regulations")
+	private List<FinancialAccount> financeaccounts = new ArrayList<FinancialAccount>();
+	
+	@ManyToMany(mappedBy="regulations")
+	private List<Product> products = new ArrayList<Product>();
+	
+	@ManyToMany(mappedBy="regulations")
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -168,4 +182,37 @@ public class Regulation {
 		this.guid = guid;
 	}
 
+	public List<OrgUnit> getOrgunits() {
+		return orgunits;
+	}
+
+	public void setOrgunits(List<OrgUnit> orgunits) {
+		this.orgunits = orgunits;
+	}
+
+	public List<FinancialAccount> getFinanceaccounts() {
+		return financeaccounts;
+	}
+
+	public void setFinanceaccounts(List<FinancialAccount> financeaccounts) {
+		this.financeaccounts = financeaccounts;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<AppSystem> getAppsystems() {
+		return appsystems;
+	}
+
+	public void setAppsystems(List<AppSystem> appsystems) {
+		this.appsystems = appsystems;
+	}
+
+	
 }
