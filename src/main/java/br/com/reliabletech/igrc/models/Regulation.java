@@ -69,6 +69,9 @@ public class Regulation {
 	@ManyToMany(mappedBy="regulations")
 	private List<AppSystem> appsystems = new ArrayList<AppSystem>();	
 	
+	@ManyToMany(mappedBy="regulations")
+	private List<ProcessStru> processes = new ArrayList<ProcessStru>();
+	
 	
 	public String getName() {
 		return name;
