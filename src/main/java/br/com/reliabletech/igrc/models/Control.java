@@ -76,7 +76,11 @@ public class Control {
 	private List<Product> products = new ArrayList<Product>();
 	
 	@ManyToMany(mappedBy="controls")
-	private List<AppSystem> appsystems = new ArrayList<AppSystem>();	
+	private List<AppSystem> appsystems = new ArrayList<AppSystem>();
+	
+	@ManyToMany(mappedBy="controls")
+	private List<ProcessStru> processes = new ArrayList<ProcessStru>();
+	
 	
 	public Control() {
 	}

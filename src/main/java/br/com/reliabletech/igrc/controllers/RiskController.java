@@ -140,7 +140,6 @@ public class RiskController {
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=assign")
 	public String attachControls(@ModelAttribute("risk") Risk risk, Model model, @RequestParam(value="cguid") String[] guids) {
-//	public String attachControls(final Risk risk, Model model) {
 		
 		Arrays.stream(guids)
 			.forEach(guid -> risk.getControls().add(

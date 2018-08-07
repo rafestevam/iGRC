@@ -3,9 +3,12 @@ package br.com.reliabletech.igrc.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
@@ -34,15 +37,18 @@ public class ProcessStru {
 	
 	private String documents;
 	
-	@ManyToMany(mappedBy="processes")
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_process_risk", joinColumns=@JoinColumn(name="process_guid"), inverseJoinColumns=@JoinColumn(name="risk_guid"))
 	private List<Risk> risks = new ArrayList<Risk>();
-	
-	@ManyToMany(mappedBy="processes")
-	private List<Control> controls = new ArrayList<Control>();
-	
-	@ManyToMany(mappedBy="processes")
-	private List<Regulation> regulations = new ArrayList<Regulation>();
 
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_process_control", joinColumns=@JoinColumn(name="process_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
+	private List<Control> controls = new ArrayList<Control>();
+
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="jt_process_reg", joinColumns=@JoinColumn(name="process_guid"), inverseJoinColumns=@JoinColumn(name="regulation_guid"))
+	private List<Regulation> regulations = new ArrayList<Regulation>();
+	
 	@ManyToMany(mappedBy="processes")
 	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
 	
