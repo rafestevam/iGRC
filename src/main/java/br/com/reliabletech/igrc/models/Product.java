@@ -7,14 +7,13 @@ import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class StruProcess {
+public class Product {
 	
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
 	private String guid;
 
-	@NotNull
-	private String processID;
+	private String prodID;
 	
 	@NotNull
 	private String name;
@@ -22,52 +21,26 @@ public class StruProcess {
 	@Lob
 	private String description;
 	
-	private String mainProcess;
+	private String owner;
+
+	private String costCenter;
 	
-	private String subProcess;
-	
-	private String owner;		
-	
-	private String documents;		
-	
+	private String documents;
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getProdID() {
+		return prodID;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getProcessID() {
-		return processID;
-	}
-
-	public void setProcessID(String processID) {
-		this.processID = processID;
-	}
-
-	public String getMainProcess() {
-		return mainProcess;
-	}
-
-	public void setMainProcess(String mainProcess) {
-		this.mainProcess = mainProcess;
-	}
-
-	public String getSubProcess() {
-		return subProcess;
-	}
-
-	public void setSubProcess(String subProcess) {
-		this.subProcess = subProcess;
+	public void setProdID(String prodID) {
+		this.prodID = prodID;
 	}
 
 	public String getOwner() {
@@ -86,6 +59,14 @@ public class StruProcess {
 		this.documents = documents;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getGuid() {
 		return guid;
 	}
@@ -93,5 +74,12 @@ public class StruProcess {
 	public void setGuid(String guid) {
 		this.guid = guid;
 	}
-	
+
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
 }

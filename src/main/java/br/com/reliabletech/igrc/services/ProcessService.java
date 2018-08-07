@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.reliabletech.igrc.models.StruProcess;
+import br.com.reliabletech.igrc.models.ProcessStru;
 
 @Transactional
 public interface ProcessService {
 
-	public void save(StruProcess process);
+	public void save(ProcessStru process);
 	
-	public List<StruProcess> findAll();
+	public List<ProcessStru> findAll();
 	
-	public StruProcess findByGuid(String guid);
+	public ProcessStru findByGuid(String guid);
 	
-	public void delete(StruProcess process);	
+	public void delete(ProcessStru process);	
 }

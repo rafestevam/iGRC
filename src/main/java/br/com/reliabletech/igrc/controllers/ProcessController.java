@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.reliabletech.igrc.models.Parameter;
-import br.com.reliabletech.igrc.models.StruProcess;
+import br.com.reliabletech.igrc.models.ProcessStru;
 import br.com.reliabletech.igrc.services.ParameterService;
 import br.com.reliabletech.igrc.services.ProcessService;
 
@@ -26,7 +26,7 @@ public class ProcessController {
 	private ParameterService parameterService;
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public String processForm(@ModelAttribute("process")StruProcess process, Model model){
+	public String processForm(@ModelAttribute("process")ProcessStru process, Model model){
 
 		List<Parameter> stdFreqs = parameterService.findByParatype("stdfreq");
 		model.addAttribute("stdFreqs", stdFreqs);
@@ -39,7 +39,7 @@ public class ProcessController {
 	@RequestMapping(value="/show", method=RequestMethod.GET)
 	public String showProcess(@RequestParam("guid") String guid, Model model) {
 		
-		StruProcess process = processService.findByGuid(guid);
+		ProcessStru process = processService.findByGuid(guid);
 		model.addAttribute("process", process);
 		model.addAttribute("update", false);
 		model.addAttribute("show", true);
@@ -49,7 +49,7 @@ public class ProcessController {
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=create")
-	public String createProcess(StruProcess process, Model model){
+	public String createProcess(ProcessStru process, Model model){
 		
 		processService.save(process);
 		model.addAttribute("successMessage", "Process created sucessfully!");
@@ -59,7 +59,7 @@ public class ProcessController {
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=update")
-	public String updateProcess(StruProcess process, Model model){
+	public String updateProcess(ProcessStru process, Model model){
 		
 		processService.save(process);
 		model.addAttribute("successMessage", "Process updated sucessfully!");
@@ -71,7 +71,7 @@ public class ProcessController {
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String processList(Model model){
 		
-		List<StruProcess> processes = processService.findAll();
+		List<ProcessStru> processes = processService.findAll();
 		model.addAttribute("processes", processes);
 		
 		return "processview";
@@ -81,9 +81,9 @@ public class ProcessController {
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteProcess(@RequestParam("guid") String guid, Model model){
 		
-		StruProcess process = processService.findByGuid(guid);
+		ProcessStru process = processService.findByGuid(guid);
 		processService.delete(process);
-		List<StruProcess> processes = processService.findAll();
+		List<ProcessStru> processes = processService.findAll();
 		model.addAttribute("processes", processes);
 		
 		return "processlist";
@@ -93,7 +93,7 @@ public class ProcessController {
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String updateProcess(@RequestParam("guid") String guid, Model model){
 		
-		StruProcess process = processService.findByGuid(guid);
+		ProcessStru process = processService.findByGuid(guid);
 		model.addAttribute("process", process);
 		model.addAttribute("update", true);
 		
