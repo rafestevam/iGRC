@@ -7,7 +7,7 @@ import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class StruProcess {
+public class ProcessStru {
 	
 	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="guid", length=100)
