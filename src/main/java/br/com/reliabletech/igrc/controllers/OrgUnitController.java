@@ -22,6 +22,27 @@ public class OrgUnitController {
 	@Autowired
 	private OrgUnitService orgunitService;
 	
+//	@Autowired
+//	private RiskService riskService;
+//	
+//	@Autowired
+//	private ControlService controlService;
+//	
+//	@Autowired
+//	private RegulationService regulationService;
+//	
+//	@Autowired
+//	private ProcessService processService;
+//	
+//	@Autowired
+//	private AppSystemService appsystemService;
+//	
+//	@Autowired
+//	private FinancialAccountService financialaccountService;
+//	
+//	@Autowired
+//	private ProductService productService;
+	
 	@Autowired
 	private ParameterService parameterService;
 	

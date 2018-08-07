@@ -76,7 +76,7 @@ public class Risk {
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_risk_controls", joinColumns=@JoinColumn(name="risk_guid"), inverseJoinColumns=@JoinColumn(name="control_guid"))
 	private List<Control> controls = new ArrayList<Control>();
-	
+
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval=true)
 	private List<Issue> issues = new ArrayList<Issue>();
 	
@@ -101,6 +101,9 @@ public class Risk {
 	
 	@ManyToMany(mappedBy="risks")
 	private List<AppSystem> appsystems = new ArrayList<AppSystem>();
+
+	@ManyToMany(mappedBy="risks")
+	private List<ProcessStru> processes = new ArrayList<ProcessStru>();
 	
 	
 	public List<RiskAssessment> getRiskassessments() {

@@ -51,7 +51,7 @@ public class OrgUnit {
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_orgunit_process", joinColumns=@JoinColumn(name="orgunit_guid"), inverseJoinColumns=@JoinColumn(name="process_guid"))
-	private List<Process> processes = new ArrayList<Process>();
+	private List<ProcessStru> processes = new ArrayList<ProcessStru>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_orgunit_appsys", joinColumns=@JoinColumn(name="orgunit_guid"), inverseJoinColumns=@JoinColumn(name="appsystem_guid"))
@@ -153,11 +153,12 @@ public class OrgUnit {
 		this.regulations = regulations;
 	}
 
-	public List<Process> getProcesses() {
+
+	public List<ProcessStru> getProcesses() {
 		return processes;
 	}
 
-	public void setProcesses(List<Process> processes) {
+	public void setProcesses(List<ProcessStru> processes) {
 		this.processes = processes;
 	}
 

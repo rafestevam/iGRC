@@ -50,7 +50,7 @@ public class FinancialAccount {
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_finacc_process", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="process_guid"))
-	private List<Process> processes = new ArrayList<Process>();
+	private List<ProcessStru> processes = new ArrayList<ProcessStru>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="jt_finacc_appsys", joinColumns=@JoinColumn(name="financialaccount_guid"), inverseJoinColumns=@JoinColumn(name="appsystem_guid"))
@@ -61,7 +61,7 @@ public class FinancialAccount {
 	private List<Product> products = new ArrayList<Product>();
 	
 	
-	@ManyToMany(mappedBy="financeaccounts")
+	@ManyToMany(mappedBy="financialaccounts")
 	private List<OrgUnit> orgunits = new ArrayList<OrgUnit>();
 	
 	
@@ -153,14 +153,6 @@ public class FinancialAccount {
 		this.regulations = regulations;
 	}
 
-	public List<Process> getProcesses() {
-		return processes;
-	}
-
-	public void setProcesses(List<Process> processes) {
-		this.processes = processes;
-	}
-
 	public List<AppSystem> getAppsystems() {
 		return appsystems;
 	}
@@ -183,6 +175,14 @@ public class FinancialAccount {
 
 	public void setOrgunits(List<OrgUnit> orgunits) {
 		this.orgunits = orgunits;
+	}
+
+	public List<ProcessStru> getProcesses() {
+		return processes;
+	}
+
+	public void setProcesses(List<ProcessStru> processes) {
+		this.processes = processes;
 	}
 	
 	
