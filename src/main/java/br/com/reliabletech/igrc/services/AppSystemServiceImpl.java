@@ -20,6 +20,11 @@ public class AppSystemServiceImpl implements AppSystemService {
 		if(appsystem.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			appsystem.setGuid(guid);
+		}else {
+			if(appsystem.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				appsystem.setGuid(guid);
+			}
 		}
 		appsystemRepository.save(appsystem);
 	}
