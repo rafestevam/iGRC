@@ -2,10 +2,10 @@ package br.com.reliabletech.igrc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.reliabletech.igrc.models.StruProcess;
+import br.com.reliabletech.igrc.models.ProcessStru;
 
-public interface ProcessRepository extends JpaRepository<StruProcess, Long>{
+public interface ProcessRepository extends JpaRepository<ProcessStru, Long>{
 
-	public StruProcess findByGuid(String guid);
+	public ProcessStru findByGuid(String guid);
 
 }
