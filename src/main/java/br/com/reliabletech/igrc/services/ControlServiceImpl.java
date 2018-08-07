@@ -20,6 +20,11 @@ public class ControlServiceImpl implements ControlService {
 		if(control.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			control.setGuid(guid);
+		}else {
+			if(control.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				control.setGuid(guid);
+			}
 		}
 		controlRepository.save(control);
 	}

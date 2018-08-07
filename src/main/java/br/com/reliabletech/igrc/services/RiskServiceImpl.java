@@ -20,6 +20,11 @@ public class RiskServiceImpl implements RiskService {
 		if(risk.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			risk.setGuid(guid);
+		}else {
+			if(risk.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				risk.setGuid(guid);
+			}
 		}
 		riskRepository.save(risk);
 	}

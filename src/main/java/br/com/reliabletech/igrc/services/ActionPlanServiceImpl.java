@@ -20,6 +20,11 @@ public class ActionPlanServiceImpl implements ActionPlanService {
 		if(actionplan.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			actionplan.setGuid(guid);
+		}else {
+			if(actionplan.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				actionplan.setGuid(guid);
+			}
 		}
 		actionplanRepository.save(actionplan);
 	}

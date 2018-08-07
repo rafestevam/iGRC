@@ -20,6 +20,11 @@ public class AuditActivityServiceImpl implements AuditActivityService {
 		if(auditactivity.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			auditactivity.setGuid(guid);
+		}else {
+			if(auditactivity.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				auditactivity.setGuid(guid);
+			}
 		}
 		auditactivityRepository.save(auditactivity);
 	}

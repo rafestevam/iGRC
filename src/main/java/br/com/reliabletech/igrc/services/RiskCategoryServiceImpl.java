@@ -21,6 +21,11 @@ public class RiskCategoryServiceImpl implements RiskCategoryService {
 		if(riskcategory.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			riskcategory.setGuid(guid);
+		}else {
+			if(riskcategory.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				riskcategory.setGuid(guid);
+			}
 		}
 		riskcategoryRepository.save(riskcategory);
 	}

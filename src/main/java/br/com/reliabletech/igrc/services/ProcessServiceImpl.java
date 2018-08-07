@@ -20,6 +20,11 @@ public class ProcessServiceImpl implements ProcessService {
 		if(process.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			process.setGuid(guid);
+		}else {
+			if(process.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				process.setGuid(guid);
+			}
 		}
 		processRepository.save(process);
 	}

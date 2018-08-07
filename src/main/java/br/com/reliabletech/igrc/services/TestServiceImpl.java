@@ -20,6 +20,11 @@ public class TestServiceImpl implements TestService {
 		if(test.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			test.setGuid(guid);
+		}else {
+			if(test.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				test.setGuid(guid);
+			}
 		}
 		testRepository.save(test);
 	}

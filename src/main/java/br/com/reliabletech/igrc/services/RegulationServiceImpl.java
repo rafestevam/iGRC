@@ -20,6 +20,11 @@ public class RegulationServiceImpl implements RegulationService {
 		if(regulation.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			regulation.setGuid(guid);
+		}else {
+			if(regulation.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				regulation.setGuid(guid);
+			}
 		}
 		regulationRepository.save(regulation);
 	}

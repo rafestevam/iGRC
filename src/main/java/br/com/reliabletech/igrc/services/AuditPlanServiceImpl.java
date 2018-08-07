@@ -20,6 +20,11 @@ public class AuditPlanServiceImpl implements AuditPlanService {
 		if(auditplan.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			auditplan.setGuid(guid);
+		}else {
+			if(auditplan.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				auditplan.setGuid(guid);
+			}
 		}
 		auditplanRepository.save(auditplan);
 	}

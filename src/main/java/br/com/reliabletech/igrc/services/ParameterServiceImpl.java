@@ -20,6 +20,11 @@ public class ParameterServiceImpl implements ParameterService {
 		if(parameter.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			parameter.setGuid(guid);
+		}else {
+			if(parameter.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				parameter.setGuid(guid);
+			}
 		}
 		parameterRepository.save(parameter);
 	}

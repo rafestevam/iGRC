@@ -19,6 +19,11 @@ public class IssueServiceImpl implements IssueService {
 		if(issue.getGuid() == null){
 			guid = UUID.randomUUID().toString();
 			issue.setGuid(guid);
+		}else {
+			if(issue.getGuid().isEmpty()) {
+				guid = UUID.randomUUID().toString();
+				issue.setGuid(guid);
+			}
 		}
 		issueRepository.save(issue);
 	}
