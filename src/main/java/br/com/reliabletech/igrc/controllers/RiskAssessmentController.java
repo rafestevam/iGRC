@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import br.com.reliabletech.igrc.components.FileSaver;
-import br.com.reliabletech.igrc.models.File;
 import br.com.reliabletech.igrc.models.Parameter;
 import br.com.reliabletech.igrc.models.RiskAssessment;
 import br.com.reliabletech.igrc.services.ParameterService;
 import br.com.reliabletech.igrc.services.RiskAssessmentService;
+import br.com.reliabletech.igrc.utils.DownloadFile;
 
 @Controller
 @RequestMapping("/riskassessment")
@@ -32,6 +36,9 @@ public class RiskAssessmentController {
 	
 	@Autowired
 	private FileSaver fileSaver;
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@RequestMapping(value="/assess", method=RequestMethod.GET)
 	public String riskassessmentForm(@ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
@@ -66,12 +73,12 @@ public class RiskAssessmentController {
 	@RequestMapping(value="/save", method=RequestMethod.POST, params="action=assess")
 	public String createRiskAssessment(@RequestParam MultipartFile file[], @ModelAttribute("riskassessment") RiskAssessment riskassessment, Model model){
 		
-		List<File> fileList = new ArrayList<>(); 		
+		List<br.com.reliabletech.igrc.models.File> fileList = new ArrayList<>(); 		
 		Map<String, String> filesMap = fileSaver.write("ra-documents", file, riskassessment.getRaID());
 		
 		filesMap.entrySet()
 			.stream()
-			.forEach(entry -> fileList.add(new File(entry.getKey(), entry.getValue())));
+			.forEach(entry -> fileList.add(new br.com.reliabletech.igrc.models.File(entry.getKey(), entry.getValue())));
 		riskassessment.setFiles(fileList);
 		
 		riskassessmentService.save(riskassessment);
@@ -133,7 +140,11 @@ public class RiskAssessmentController {
 		
 	}
 	
-	
-	
+	@RequestMapping(value="/download", method=RequestMethod.GET)
+	public StreamingResponseBody getStreamingFile(@RequestParam("filename") String filename, HttpServletResponse response) {
+		
+		return DownloadFile.downloadFile(filename, response, servletContext);
+		
+	}
 	
 }

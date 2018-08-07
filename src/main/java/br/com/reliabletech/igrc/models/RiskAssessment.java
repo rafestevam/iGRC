@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -52,8 +50,9 @@ public class RiskAssessment {
 	@ElementCollection
 	private List<File> files = new ArrayList<File>();
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	//@Temporal(TemporalType.DATE)
+	//@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private java.util.Date assessDate;
 		
 	//@ManyToOne(targetEntity = Risk.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})

@@ -374,6 +374,22 @@
     		</div>
     	</div>
     </div>
+    
+    <table class="table" th:fragment="documentsTable(files)">
+		<thead>
+			<tr>
+				<th scope="col" style="width:80%">Documents Attached</th>
+				<th scope="col" style="width:20%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="file : ${files}">
+				<td><span th:text="${file.name}"></span></td>
+				<td><a th:href="@{/riskassessment/download(filename=${file.address})}"><i class="fas fa-download"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+    
 	
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
