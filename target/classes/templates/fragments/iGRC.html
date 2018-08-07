@@ -61,7 +61,7 @@
                   <a th:href="@{/test/view}">Test Executions</a>
                 </li>
                 <li>
-                  <a href="#">Test Planning</a>
+                  <a th:href="@{/testplan/view}">Test Planning</a>
                 </li>
                 <li>
                   <a href="#">Control Assessments</a>
@@ -113,25 +113,22 @@
               <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLibs">Company libraries</a>
               <ul class="sidenav-third-level collapse" id="collapseLibs">
                 <li>
-                  <a href="#">Organizational Structures</a>
+                  <a th:href="@{/orgunit/view}">Organizational Structure</a>
                 </li>
                 <li>
                   <a th:href="@{/process/view}">Processes</a>
                 </li>
                 <li>
-                  <a href="#">Systems</a>
+                  <a th:href="@{/appsystem/view}">Systems</a>
                 </li>
                 <li>
-                  <a href="#">Financial Accounts</a>
+                  <a th:href="@{/financialaccount/view}">Financial Accounts</a>
                 </li>
                 <li>
-                  <a href="#">Products</a>
+                  <a th:href="@{/product/view}">Products</a>
                 </li>
                 <li>
                   <a href="#">Customer Segments</a>
-                </li>
-                <li>
-                  <a href="#">Roles</a>
                 </li>
               </ul>
             </li>
@@ -169,7 +166,10 @@
                   <a href="#">Enterprise Management</a>
                 </li>
                 <li>
-                  <a href="#">User Group Privileges</a>
+                  <a href="#">Roles</a>
+                </li>                
+                <li>
+                  <a href="#">Group Privileges</a>
                 </li>
                 <li>
                   <a href="#">User Management</a>
